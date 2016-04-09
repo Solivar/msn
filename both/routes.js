@@ -57,3 +57,30 @@ publicRoutes.route('/logout', {
         });
     }
 });
+
+/* User profile related routes */
+var userProfileRoutes = FlowRouter.group({
+    prefix: '/user',
+    name: 'user'
+});
+
+/**
+ * User settings route.
+ */
+userProfileRoutes.route('/settings', {
+    name: 'user-settings',
+    action: function () {
+        BlazeLayout.render('layouts_base', {
+            main: 'user_settings_includes_changepass'
+        });
+    }
+});
+
+userProfileRoutes.route('/info', {
+    name: 'user-info',
+    action: function () {
+        BlazeLayout.render('layouts_base', {
+            main: 'user_settings_includes_info'
+        });
+    }
+});

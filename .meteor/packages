@@ -15,6 +15,5 @@ fourseven:scss               # Add Sass support to Meteor
 seba:minifiers-autoprefixer  # Autoprefixer for Meteor
 accounts-password            # User accounts with password support
 twbs:bootstrap               # Boostrap support
-accounts-ui                  # Simple templates to add login widgets to an app
 kadira:flow-router           # Carefully Designed Client Side Router for Meteor
 kadira:blaze-layout          # Layout Manager for Blaze (works well with FlowRouter)
