@@ -1,4 +1,4 @@
-##### Meteor packages #####
+##### Meteor packages ########
 meteor-base                  # Packages every Meteor app needs to have
 mobile-experience            # Packages for a great mobile UX
 mongo                        # The database Meteor supports right now
@@ -13,6 +13,8 @@ insecure                     # Allow all DB writes from clients (for prototyping
 ##### Community packages #####
 fourseven:scss               # Add Sass support to Meteor
 seba:minifiers-autoprefixer  # Autoprefixer for Meteor
-accounts-password            # Password support user accounts
+accounts-password            # User accounts with password support
 twbs:bootstrap               # Boostrap support
 accounts-ui                  # Simple templates to add login widgets to an app
+kadira:flow-router           # Carefully Designed Client Side Router for Meteor
+kadira:blaze-layout          # Layout Manager for Blaze (works well with FlowRouter)

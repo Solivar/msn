@@ -1,0 +1,15 @@
+/* Styles for various forms */
+
+#user-login-form {
+  .button-wrapper {
+    padding: 0;
+    float: right;
+  }
+
+  button[type="submit"] {
+    width: 100%;
+    font-size: 24px;
+    height: 36px;
+    line-height: 18px;
+  }
+}
