@@ -1,6 +1,6 @@
 /* Styles for various forms */
 
-#user-login-form {
+.centered-form {
   .button-wrapper {
     padding: 0;
     float: right;
@@ -11,5 +11,11 @@
     font-size: 24px;
     height: 36px;
     line-height: 18px;
+  }
+}
+
+#user-register-form {
+  button[type="submit"] {
+    font-size: 16px;
   }
 }

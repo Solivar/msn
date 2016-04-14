@@ -47,6 +47,17 @@ guestOnlyRoutes.route('/login', {
 });
 
 /**
+ * Register route.
+ */
+guestOnlyRoutes.route('/register', {
+    name: 'register',
+    action: function () {
+        BlazeLayout.render('register_view');
+    }
+
+});
+
+/**
  * Logout route.
  */
 publicRoutes.route('/logout', {
