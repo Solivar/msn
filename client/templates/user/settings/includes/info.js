@@ -3,7 +3,7 @@
  */
 Template.user_settings_includes_info.events({
     /**
-     * Change user account password.
+     * Change user information.
      *
      * @param e
      */
