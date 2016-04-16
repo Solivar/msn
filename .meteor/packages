@@ -17,3 +17,4 @@ kadira:flow-router           # Carefully Designed Client Side Router for Meteor
 kadira:blaze-layout          # Layout Manager for Blaze (works well with FlowRouter)
 aldeed:simple-schema         # A simple schema validation object with reactivity. Used by collection2 and autoform.
 reactive-var                 # reactive-var: Reactive variable
+fortawesome:fontawesome

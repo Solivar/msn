@@ -39,7 +39,7 @@ privateRoutes.route('/', {
     name: 'home',
     action: function () {
         BlazeLayout.render('layouts_base', {
-            main: 'home_view'
+            main: 'user_profile_view'
         });
     }
 });
@@ -77,26 +77,17 @@ publicRoutes.route('/logout', {
     }
 });
 
-/* User profile related routes */
-var userProfileRoutes = privateRoutes.group({
-    prefix: '/user',
-    name: 'user'
-});
-
-userProfileRoutes.route('/', {
-    name: 'user-profile',
-    action: function () {
-        BlazeLayout.render('layouts_base', {
-            main: 'user_profile_view'
-        });
-    }
+/* User settings related routes */
+var userSettingsRoutes = privateRoutes.group({
+    prefix: '/settings',
+    name: 'settings'
 });
 
 /**
- * User settings route.
+ * Change password route.
  */
-userProfileRoutes.route('/settings', {
-    name: 'user-settings',
+userSettingsRoutes.route('/changepass', {
+    name: 'settings-changepass',
     action: function () {
         BlazeLayout.render('layouts_base', {
             main: 'user_settings_includes_changepass'
@@ -104,8 +95,11 @@ userProfileRoutes.route('/settings', {
     }
 });
 
-userProfileRoutes.route('/info', {
-    name: 'user-info',
+/**
+ * Change user info route.
+ */
+userSettingsRoutes.route('/info', {
+    name: 'settings-info',
     action: function () {
         BlazeLayout.render('layouts_base', {
             main: 'user_settings_includes_info'

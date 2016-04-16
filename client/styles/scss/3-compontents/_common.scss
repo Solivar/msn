@@ -20,6 +20,31 @@ header {
   }
 }
 
+nav {
+  .nav-tabs > li {
+    > a, a:hover, a:focus, a:active {
+      border-radius: 0;
+      margin: 0;
+    }
+  }
+
+  .nav-tabs > li.active {
+    > a, a:hover, a:focus, a:active {
+      border-top-color: transparent;
+    }
+  }
+
+  #home {
+    a {
+      padding-bottom: 8px;
+    }
+
+    .fa-home {
+      font-size: 20px;
+    }
+  }
+}
+
 main {
   padding: 20px 40px;
 
