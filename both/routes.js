@@ -75,6 +75,15 @@ var userProfileRoutes = FlowRouter.group({
     name: 'user'
 });
 
+userProfileRoutes.route('/:userId', {
+    name: 'user-profile',
+    action: function () {
+        BlazeLayout.render('layouts_base', {
+            main: 'user_profile_view'
+        });
+    }
+});
+
 /**
  * User settings route.
  */
