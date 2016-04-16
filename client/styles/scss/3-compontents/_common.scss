@@ -1,5 +1,35 @@
 /* Common styles */
 
+/* Page header */
+header {
+  background: $c-gray;
+  height: 80px;
+  padding: 20px 20px 0;
+  box-sizing: border-box;
+
+  h1 {
+    margin: 0;
+    line-height: 40px;
+
+    a:hover,
+    a:active,
+    a:focus {
+      text-decoration: none;
+      color: $c-blue;
+    }
+  }
+}
+
+main {
+  padding: 20px 40px;
+
+  &:after {
+    display: block;
+    content: " ";
+    clear: both;
+  }
+}
+
 .centered-wrapper {
   display: flex;
   justify-content: center;

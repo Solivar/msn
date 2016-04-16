@@ -2,6 +2,8 @@
 var privateRoutes = FlowRouter.group({
     triggersEnter: [
         function (context, redirect) {
+            BlazeLayout.setRoot('body');
+
             if (!Meteor.userId()) {
                 return redirect('login');
             }
@@ -11,12 +13,18 @@ var privateRoutes = FlowRouter.group({
 
 /* Everyone can access these routes */
 var publicRoutes = FlowRouter.group({
+    triggersEnter: [
+        function () {
+            BlazeLayout.setRoot('body');
+        }
+    ]
 });
 
 /* Only non-logged in users can access these roues */
 var guestOnlyRoutes = FlowRouter.group({
     triggersEnter: [
         function (context, redirect) {
+            BlazeLayout.setRoot('body');
             if (Meteor.userId()) {
                 return redirect('home');
             }
@@ -70,12 +78,12 @@ publicRoutes.route('/logout', {
 });
 
 /* User profile related routes */
-var userProfileRoutes = FlowRouter.group({
+var userProfileRoutes = privateRoutes.group({
     prefix: '/user',
     name: 'user'
 });
 
-userProfileRoutes.route('/:userId', {
+userProfileRoutes.route('/', {
     name: 'user-profile',
     action: function () {
         BlazeLayout.render('layouts_base', {
