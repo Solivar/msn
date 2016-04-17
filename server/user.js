@@ -6,19 +6,33 @@ Meteor.methods({
     /**
      * Update user profile information.
      *
-     * @param firstname
-     * @param lastname
+     * @param userData
      */
-    changeUserInfo: function (firstname, lastname) {
+    changeUserInfo: function (userData) {
         if (!Meteor.user()) {
             return;
         }
 
+        let user = Meteor.users.findOne(Meteor.userId()),
+            profile = user.profile;
+
+        console.log(profile);
+        return;
+
         Meteor.users.update(Meteor.userId(), {
             $set: {
-                'profile.firstname': firstname,
-                'profile.lastname': lastname
+                'profile' : profile
             }
         });
+    },
+    
+    getUserInfo: function () {
+        if (!Meteor.user()) {
+            return {};
+        }
+        
+        let user = Meteor.users.findOne(Meteor.userId());
+        
+        return user.profile;
     }
 });

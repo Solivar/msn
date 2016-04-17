@@ -1,20 +1,23 @@
-##### Meteor packages ########
-meteor-base                  # Packages every Meteor app needs to have
-mobile-experience            # Packages for a great mobile UX
-mongo                        # The database Meteor supports right now
-blaze-html-templates         # Compile .html files into Meteor Blaze views
-session                      # Client-side reactive dictionary for your app
-jquery                       # Helpful client-side library
-tracker                      # Meteor's client-side reactive programming library
-es5-shim                     # ECMAScript 5 compatibility for older browsers.
-ecmascript                   # Enable ECMAScript2015+ syntax in app code
-##### Community packages #####
-fourseven:scss               # Add Sass support to Meteor
-seba:minifiers-autoprefixer  # Autoprefixer for Meteor
-accounts-password            # User accounts with password support
-twbs:bootstrap               # Boostrap support
-kadira:flow-router           # Carefully Designed Client Side Router for Meteor
-kadira:blaze-layout          # Layout Manager for Blaze (works well with FlowRouter)
-aldeed:simple-schema         # A simple schema validation object with reactivity. Used by collection2 and autoform.
-reactive-var                 # reactive-var: Reactive variable
-fortawesome:fontawesome
+####### Meteor packages #########
+meteor-base                     # Packages every Meteor app needs to have
+mobile-experience               # Packages for a great mobile UX
+mongo                           # The database Meteor supports right now
+blaze-html-templates            # Compile .html files into Meteor Blaze views
+session                         # Client-side reactive dictionary for your app
+jquery                          # Helpful client-side library
+tracker                         # Meteor's client-side reactive programming library
+es5-shim                        # ECMAScript 5 compatibility for older browsers.
+ecmascript                      # Enable ECMAScript2015+ syntax in app code
+####### Community packages ######
+fourseven:scss                  # Add Sass support to Meteor
+seba:minifiers-autoprefixer     # Autoprefixer for Meteor
+accounts-password               # User accounts with password support
+twbs:bootstrap                  # Boostrap support
+kadira:flow-router              # Carefully Designed Client Side Router for Meteor
+kadira:blaze-layout             # Layout Manager for Blaze (works well with FlowRouter)
+aldeed:simple-schema            # A simple schema validation object with reactivity. Used by collection2 and autoform.
+reactive-var                    # reactive-var: Reactive variable
+fortawesome:fontawesome         # Font Awesome packaged for Meteor.js.
+momentjs:moment                 # Moment.js (official): parse, validate, manipulate, and display dates
+tsega:bootstrap3-datetimepicker # Bootstrap 3 DateTime picker
+underscore                      # Collection of small helpers

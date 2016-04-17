@@ -9,7 +9,8 @@ Template.layouts_base.onRendered(function () {
         FlowRouter.watchPathChange();
         var context = FlowRouter.current();
 
-        var currRouteSelector = '#' + context.route.name;
+        /* If currently active view is part of a route group, add active class to dropdown menu triggering element */
+        var currRouteSelector = context.route.group.name ? '#' + context.route.group.name : '#' + context.route.name;
         $('.nav li').removeClass('active');
         $(currRouteSelector).addClass('active');
     });
