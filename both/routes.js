@@ -106,3 +106,12 @@ userSettingsRoutes.route('/info', {
         });
     }
 });
+
+privateRoutes.route('/profile/:userId', {
+    name: 'user-profile',
+    action: function () {
+        BlazeLayout.render('layouts_base', {
+            main: 'user_profile_view'
+        });
+    }
+});
