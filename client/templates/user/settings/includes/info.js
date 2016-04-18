@@ -6,40 +6,34 @@ Template.user_settings_includes_info.onRendered(function () {
 
     Meteor.call('getUserInfo', function (error, result) {
         if (!error) {
-
-            $('#user-info-form-firstname').val(result.firstname);
-            $('#user-info-form-lastname').val(result.lastname);
-            let dob = new Date(result.dob);
-
-            switch (result.gender) {
-                case 'male':
-                    $('#user-info-form-male').prop('checked', true);
-                    break;
-                case 'female':
-                    $('#user-info-form-female').prop('checked', true);
-                    break;
-                case 'unspecified':
-                    $('#user-info-form-unspecified').prop('checked', true);
-                    break;
-            }
-
-            $('#user-info-form-country').val(result.country);
-            $('#user-info-form-city').val(result.city);
-            $('#user-info-form-about').val(result.about);
-
             const maxDate = moment().subtract(4, 'years');
+            let defaultDate;
 
-            console.log(dob);
-            //
-            // if (!dob) {
-            //     console.log('lele');
-            //     dob = maxDate;
-            // }
+            _.each(result, function (value, key) {
+                if (key === 'gender') {
+                    switch (result.gender) {
+                        case 'male':
+                            $('#user-info-form-male').prop('checked', true);
+                            break;
+                        case 'female':
+                            $('#user-info-form-female').prop('checked', true);
+                            break;
+                        case 'unspecified':
+                            $('#user-info-form-unspecified').prop('checked', true);
+                            break;
+                    }
+                } else if (key === 'dob') {
+                    defaultDate = value ? new Date(value) : maxDate;
+                } else {
+                    let selector = '#user-info-form-' + key;
+                    $(selector).val(value);
+                }
+            });
 
             $('#user-info-form-dob').datetimepicker({
                 format: 'MMMM Do YYYY',
                 useCurrent: false,
-                defaultDate: dob,
+                defaultDate: defaultDate,
                 maxDate: maxDate
             });
         }
