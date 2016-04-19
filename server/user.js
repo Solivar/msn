@@ -13,15 +13,9 @@ Meteor.methods({
             return;
         }
 
-        let user = Meteor.users.findOne(Meteor.userId()),
-            profile = user.profile;
-
-        console.log(profile);
-        return;
-
         Meteor.users.update(Meteor.userId(), {
             $set: {
-                'profile' : profile
+                'profile' : userData
             }
         });
     },
