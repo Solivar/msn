@@ -6,7 +6,9 @@
 <template name="layouts_base">
     {{> layouts_includes_header}}
     {{> layouts_includes_menu}}
-    <main>
-        {{> UI.dynamic template=main}}
+    <main class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            {{> UI.dynamic template=main}}
+        </div>
     </main>
 </template>
