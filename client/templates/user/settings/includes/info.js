@@ -1,6 +1,9 @@
 /**
  * Change user information settings template functions.
  */
+Template.user_settings_includes_info.onCreated(function () {
+    document.title = 'MSN - Profile Information';
+});
 
 Template.user_settings_includes_info.onRendered(function () {
 

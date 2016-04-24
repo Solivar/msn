@@ -6,61 +6,57 @@
 <template name="user_settings_includes_info">
     <div class="settings-info-page">
         <div class="row">
-            <div class="col-xs-6">
-                <div class="col-sm-12">
-                    <h2>Profile information</h2>
-                </div>
+            <div class="col-sm-12">
+                <h2>Profile information</h2>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-xs-6 col-md-4">
-                <form id="user-info-form">
-                    <div class="form-group col-sm-6">
-                        <input type="text" name="firstname" id="user-info-form-firstname" class="form-control" placeholder="Firstname">
-                    </div>
+            <form id="user-info-form">
+                <div class="form-group col-sm-6">
+                    <input type="text" name="firstname" id="user-info-form-firstname" class="form-control" placeholder="Firstname">
+                </div>
 
-                    <div class="form-group col-sm-6">
-                        <input type="text" name="lastname" id="user-info-form-lastname" class="form-control" placeholder="Lastname">
-                    </div>
+                <div class="form-group col-sm-6">
+                    <input type="text" name="lastname" id="user-info-form-lastname" class="form-control" placeholder="Lastname">
+                </div>
 
-                    <div class="form-group col-sm-12">
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="dob" id="user-info-form-dob" data-DateTimePicker placeholder="Date of Birth">
-                            <div class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></div>
-                        </div>
+                <div class="form-group col-sm-12">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="dob" id="user-info-form-dob" data-DateTimePicker placeholder="Date of Birth">
+                        <div class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></div>
                     </div>
+                </div>
 
-                    <div class="form-group col-sm-12">
-                        <label class="radio-inline">
-                            <input type="radio" name="gender" id="user-info-form-male" value="male">Male
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="gender" id="user-info-form-female" value="female">Female
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="gender" id="user-info-form-unspecified" value="unspecified">Unspecified
-                        </label>
-                    </div>
+                <div class="form-group col-sm-12">
+                    <label class="radio-inline">
+                        <input type="radio" name="gender" id="user-info-form-male" value="male">Male
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="gender" id="user-info-form-female" value="female">Female
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="gender" id="user-info-form-unspecified" value="unspecified">Unspecified
+                    </label>
+                </div>
 
-                    <div class="form-group col-sm-6">
-                        <input type="text" name="country" id="user-info-form-country" class="form-control" placeholder="Country">
-                    </div>
+                <div class="form-group col-sm-6">
+                    <input type="text" name="country" id="user-info-form-country" class="form-control" placeholder="Country">
+                </div>
 
-                    <div class="form-group col-sm-6">
-                        <input type="text" name="city" id="user-info-form-city" class="form-control" placeholder="City">
-                    </div>
+                <div class="form-group col-sm-6">
+                    <input type="text" name="city" id="user-info-form-city" class="form-control" placeholder="City">
+                </div>
 
 
-                    <div class="form-group col-sm-12">
-                        <textarea rows=5 name="about" id="user-info-form-about" class="form-control" placeholder="Tell others about yourself"></textarea>
-                    </div>
+                <div class="form-group col-sm-12">
+                    <textarea rows=5 name="about" id="user-info-form-about" class="form-control" placeholder="Tell others about yourself"></textarea>
+                </div>
 
-                    <div class="form-group col-sm-12">
-                        <button type="submit" class="btn btn-default">Submit</button>
-                    </div>
-                </form>
-            </div>
+                <div class="form-group col-sm-12">
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </div>
+            </form>
         </div>
     </div>
 </template>

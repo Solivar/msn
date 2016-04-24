@@ -1,6 +1,10 @@
 /**
  * Login view template functions.
  */
+Template.login_view.onCreated(function () {
+    document.title = 'MSN - Login';
+});
+
 Template.login_view.events({
     /**
      * Log user into the system.

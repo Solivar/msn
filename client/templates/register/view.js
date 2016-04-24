@@ -1,6 +1,10 @@
 /**
  * Register view template functions.
  */
+Template.register_view.onCreated(function () {
+    document.title = 'MSN - Register';
+});
+
 Template.register_view.events({
     /**
      * Register user in the sytem.

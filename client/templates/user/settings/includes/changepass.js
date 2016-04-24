@@ -1,6 +1,11 @@
 /**
  * Change user password template functions.
  */
+
+Template.user_settings_includes_changepass.onCreated(function () {
+    document.title = 'MSN - Change Password';
+});
+
 Template.user_settings_includes_changepass.events({
     /**
      * Change user account password.
