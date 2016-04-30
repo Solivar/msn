@@ -46,8 +46,12 @@ nav {
 }
 
 main {
-  &.row {
-    padding: 20px 40px;
+  &.container {
+    padding: 10px 0;
+
+    @include respond-to('small') {
+      padding: 20px 40px;
+    }
 
     &:after {
       display: block;

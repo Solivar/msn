@@ -1,0 +1,14 @@
+/* Styles for links. */
+
+.search-page {
+  .latest-users {
+    a {
+      color: $c-green;
+
+      &:hover,
+      &:active {
+        color: $c-black;
+      }
+    }
+  }
+}

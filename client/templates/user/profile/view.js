@@ -2,7 +2,7 @@
  * User profile template functions.
  */
 Template.user_profile_view.onCreated(function () {
-    Meteor.subscribe('userProfiles', function () {
+    this.subscribe('userProfiles', function () {
         var userId = FlowRouter.getParam('userId'),
             user = userId ? Meteor.users.findOne({ _id : userId }) : Meteor.users.findOne({ _id : Meteor.userId() });
 

@@ -1,7 +1,6 @@
 /**
  * User server side methods.
  */
-
 Meteor.methods({
     /**
      * Update user profile information.
@@ -18,15 +17,5 @@ Meteor.methods({
                 'profile' : userData
             }
         });
-    },
-    
-    getUserInfo: function () {
-        if (!Meteor.user()) {
-            return {};
-        }
-        
-        let user = Meteor.users.findOne(Meteor.userId());
-        
-        return user.profile;
     }
 });

@@ -117,11 +117,26 @@ userSettingsRoutes.route('/info', {
     }
 });
 
+/**
+ * User profile route.
+ */
 privateRoutes.route('/profile/:userId', {
     name: 'user-profile',
     action: function () {
         BlazeLayout.render('layouts_base', {
             main: 'user_profile_view'
+        });
+    }
+});
+
+/**
+ * Search route.
+ */
+privateRoutes.route('/search', {
+    name: 'search',
+    action: function () {
+        BlazeLayout.render('layouts_base', {
+            main: 'search_view'
         });
     }
 });

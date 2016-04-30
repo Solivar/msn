@@ -1,0 +1,54 @@
+<!--
+/**
+ * Search template.
+ */
+-->
+<template name="search_view">
+    <div class="search-page">
+        <div class="row">
+            <div class="col-sm-12 col-xs-10 latest-users">
+                <h2>Recently joined</h2>
+                {{#if queryingLatest}}
+                    <p>Loading</p>
+                {{else}}
+                    {{#each getUsers}}
+                        <p>
+                            <a href="{{profileUrl _id}}">{{profile.firstname}} {{profile.lastname}}</a>
+                        </p>
+                    {{/each}}
+                {{/if}}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <h2>Search</h2>
+            </div>
+        </div>
+        <div class="row">
+            <form id="search-form">
+                <div class="form-group col-sm-8 col-xs-10">
+                    <input type="text" name="name" id="search-form-name" class="form-control" placeholder="Name">
+                </div>
+
+                <div class="form-group col-sm-4 col-xs-2">
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </div>
+            </form>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+
+                {{#if queryingSearch}}
+                    <p>Loading</p>
+                {{else}}
+                    {{#each getSearch}}
+                        <p>
+                            <a href="{{profileUrl _id}}">{{profile.firstname}} {{profile.lastname}}</a>
+                        </p>
+                    {{/each}}
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</template>
