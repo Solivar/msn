@@ -6,20 +6,69 @@
 <template name="register_view">
     <main class="register-page">
         <div class="centered-wrapper">
-            <div class="col-sm-4 col-xs-10">
+            <div class="col-sm-8 col-xs-10">
                 <h2 class="text-center">Register</h2>
                 <form id="user-register-form" class="centered-form">
-                    <div class="form-group">
-                        <input type="text" name="user-register-form-email" id="user-register-form-email" class="form-control" placeholder="Email">
+                    <div class="form-group col-sm-6">
+                        <input type="text" name="email" id="user-register-form-email" class="form-control"
+                               placeholder="Email">
                     </div>
-                    <div class="form-group">
-                        <input type="password" name="user-register-form-password" id="user-register-form-password" class="form-control" placeholder="Password">
+
+                    <div class="form-group col-sm-6">
+                        <input type="text" name="email-repeat" id="user-register-form-email-repeat" class="form-control"
+                               placeholder="Repeat Email">
                     </div>
-                    <div class="form-group col-sm-6 button-wrapper">
+
+                    <div class="form-group col-sm-6">
+                        <input type="password" name="password" id="user-register-form-password" class="form-control"
+                               placeholder="Password">
+                    </div>
+
+                    <div class="form-group col-sm-6">
+                        <input type="password" name="password-repeat" id="user-register-form-password-repeat"
+                               class="form-control" placeholder="Repeat Password">
+                    </div>
+
+                    <div class="form-group col-sm-6">
+                        <input type="text" name="firstname" id="user-register-form-firstname" class="form-control"
+                               placeholder="Firstname" data-profile>
+                    </div>
+
+                    <div class="form-group col-sm-6">
+                        <input type="text" name="lastname" id="user-register-form-lastname" class="form-control"
+                               placeholder="Lastname" data-profile>
+                    </div>
+
+                    <div class="form-group col-sm-12">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="dob" id="user-register-form-dob"
+                                   data-DateTimePicker placeholder="Date of Birth" data-profile>
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-sm-12">
+                        <label class="radio-inline">
+                            <input type="radio" name="gender" id="user-register-form-male" value="male" data-profile>Male
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="gender" id="user-register-form-female" value="female"
+                                   data-profile>Female
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="gender" id="user-register-form-unspecified" value="unspecified"
+                                   data-profile>Unspecified
+                        </label>
+                    </div>
+
+                    <div class="form-group col-sm-4 button-wrapper">
                         <button type="submit" class="btn btn-default">Register</button>
                     </div>
+
                 </form>
-                <a href="/login">Login</a>
+                <div class="col-sm-4">
+                    <a href="/login">Login</a>
+                </div>
             </div>
         </div>
     </main>
