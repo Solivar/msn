@@ -77,6 +77,16 @@ publicRoutes.route('/logout', {
     }
 });
 
+/**
+ * About route.
+ */
+    publicRoutes.route('/about', {
+    name: 'logout',
+    action: function () {
+        BlazeLayout.render('about_view');
+    }
+});
+
 /* User settings related routes */
 var userSettingsRoutes = privateRoutes.group({
     prefix: '/settings',

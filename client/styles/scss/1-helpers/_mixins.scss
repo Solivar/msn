@@ -1,0 +1,19 @@
+/**
+ * Create a media query.
+ *
+ * @param {String} breakpoint name
+ */
+@mixin respond-to($breakpoint) {
+  /* Get the value of breakpoint from its name */
+  $value: map-get($breakpoints, $breakpoint);
+
+  @if $value != null {
+    @media (min-width: $value) {
+      @content;
+    }
+  }
+
+  @else {
+    @warn "Breakpoint `#{$breakpoint}` not found.";
+  }
+}

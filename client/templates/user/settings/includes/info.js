@@ -6,11 +6,10 @@ Template.user_settings_includes_info.onCreated(function () {
 });
 
 Template.user_settings_includes_info.onRendered(function () {
-
     Meteor.call('getUserInfo', function (error, result) {
         if (!error) {
             const maxDate = moment().subtract(4, 'years');
-            let defaultDate;
+            let defaultDate = maxDate;
 
             _.each(result, function (value, key) {
                 if (key === 'gender') {
@@ -26,7 +25,8 @@ Template.user_settings_includes_info.onRendered(function () {
                             break;
                     }
                 } else if (key === 'dob') {
-                    defaultDate = value ? new Date(value) : maxDate;
+                    /* If age is not set use max allowed date as default */
+                    defaultDate = new Date(value);
                 } else {
                     let selector = '#user-info-form-' + key;
                     $(selector).val(value);
@@ -65,7 +65,6 @@ Template.user_settings_includes_info.events({
         });
 
         /* TODO: Implement input value check */
-        /* TODO: Pass data as object in 1 param */
         Meteor.call('changeUserInfo', userData, function (error, result) {
             if (!error) {
                 console.log('success');

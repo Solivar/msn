@@ -1,4 +1,4 @@
-/* Variable styles */
+/* Color variables */
 $c-white: #fbfbfb;
 $c-gray: #eeeeee;
 $c-green: #33b770;
@@ -6,3 +6,16 @@ $c-blue: #337ab7;
 $c-purple: #b7337a;
 $c-bronze: #b77033;
 
+/* Media query breakpoint variables */
+$small: 768px;
+$xsmall-max: ($small - 1);
+$medium: 992px;
+$small-max: ($medium - 1);
+$large: 1200px;
+$medium-max: ($large - 1);
+
+$breakpoints: (
+        'small'  : 767px,
+        'medium' : 992px,
+        'large'  : 1200px
+);

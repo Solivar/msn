@@ -5,9 +5,21 @@
 -->
 <template name="user_profile_view">
     <div class="profile-page">
-        <p>Hello World!</p>
         {{#with getUser}}
-            <p>Name: {{profile.firstname}}</p>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2>{{profile.firstname}} {{profile.lastname}}</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <p>From: {{profile.city}}, {{profile.country}}</p>
+                    <p>Age: {{dobToAge profile.dob}}</p>
+                    {{#if profile.about}}
+                        <p>{{profile.about}}</p>
+                    {{/if}}
+                </div>
+            </div>
         {{/with}}
     </div>
 </template>
