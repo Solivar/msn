@@ -12,13 +12,27 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-12">
+                <div class="{{#if isMyProfile}}col-sm-12{{else}}col-sm-8{{/if}}">
                     <p>From: {{profile.city}}, {{profile.country}}</p>
                     <p>Age: {{dobToAge profile.dob}}</p>
                     {{#if profile.about}}
                         <p>{{profile.about}}</p>
                     {{/if}}
                 </div>
+                {{#unless isMyProfile}}
+                <div class="col-sm-4">
+                    <p>
+                        <a href="#" class="profile-action add-friend">
+                            <i class="fa fa-user-plus" aria-hidden="true"></i> Add Friend
+                        </a>
+                    </p>
+                    <p>
+                        <a href="#" class="profile-action send-msg">
+                            <i class="fa fa-envelope" aria-hidden="true"></i> Send Message
+                        </a>
+                    </p>
+                </div>
+                {{/unless}}
             </div>
         {{/with}}
     </div>

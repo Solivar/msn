@@ -1,14 +1,12 @@
 /* Styles for links. */
 
-.search-page {
-  .latest-users {
-    a {
-      color: $c-green;
+.profile-page {
+  .profile-action {
+    color: $c-green;
 
-      &:hover,
-      &:active {
-        color: $c-black;
-      }
+    &:hover,
+    &:active {
+      color: $c-black;
     }
   }
 }

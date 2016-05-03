@@ -5,11 +5,28 @@
 /**
  * Publish collection with user profile information.
  */
-/**
- * TODO: Publish only necessary info
- */
-Meteor.publish('userProfiles', function () {
-    return Meteor.users.find({});
+Meteor.publish('userProfile', function (userId) {
+    if (!userId) {
+        return [];
+    }
+
+    let users = Meteor.users.find({ '_id' : userId }, {
+        fields : {
+            'profile.firstname' : 1,
+            'profile.lastname'  : 1,
+            'profile.dob'       : 1,
+            'profile.gender'    : 1,
+            'profile.country'   : 1,
+            'profile.city'      : 1,
+            'profile.about'     : 1
+        }
+    });
+
+    if (users) {
+        return users;
+    }
+
+    return this.ready();
 });
 
 /**
@@ -30,4 +47,48 @@ Meteor.publish('latestUsers', function () {
     }
 
     return this.ready();
+});
+
+/**
+ * User server side methods.
+ */
+Meteor.methods({
+    /**
+     * Update user profile information.
+     *
+     * @param userData
+     */
+    changeUserInfo: function (userData) {
+        if (!Meteor.user()) {
+            return;
+        }
+
+        Meteor.users.update(Meteor.userId(), {
+            $set: {
+                'profile' : userData
+            }
+        });
+    },
+
+    /**
+     * Find users whose firstname or lastname matches name.
+     *
+     * @param {String} name
+     * @returns {Array}
+     */
+    searchUsers: function (name) {
+        if (!Meteor.user()) {
+            return;
+        }
+
+        /* TODO: Save user firstname and lastname in lowercase and search in lowercase too */
+        return Meteor.users.find({
+            $or : [{ 'profile.firstname' : name }, { 'profile.lastname' : name }]
+        }, {
+            fields : {
+                'profile.firstname' : 1,
+                'profile.lastname'  : 1
+            }
+        }).fetch();
+    }
 });
