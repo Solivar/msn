@@ -33,6 +33,16 @@ var guestOnlyRoutes = FlowRouter.group({
 });
 
 /**
+ * 404 page.
+ */
+FlowRouter.notFound = {
+    name: '404',
+    action: function () {
+        BlazeLayout.render('not_found_view');
+    }
+};
+
+/**
  * Home route.
  */
 privateRoutes.route('/', {
@@ -137,6 +147,18 @@ privateRoutes.route('/search', {
     action: function () {
         BlazeLayout.render('layouts_base', {
             main: 'search_view'
+        });
+    }
+});
+
+/**
+ * Friend friends route.
+ */
+privateRoutes.route('/friends', {
+    name: 'friends',
+    action: function () {
+        BlazeLayout.render('layouts_base', {
+            main: 'friends_view'
         });
     }
 });

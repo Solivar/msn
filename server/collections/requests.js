@@ -3,7 +3,7 @@
  */
 
 /**
- * Publish collection with user friend requests.
+ * Publish collection with user friend friends.
  */
 Meteor.publish('friendRequests', function () {
     let friendRequests = Requests.find({
@@ -43,7 +43,7 @@ Meteor.publish('friendStatus', function (userId) {
  */
 Meteor.methods({
     /**
-     * Send a friend requests to a user.
+     * Send a friend friends to a user.
      *
      * @param userId User id that is going to be invited
      */
