@@ -21,11 +21,15 @@
                 </div>
                 {{#unless isMyProfile}}
                 <div class="col-sm-4">
-                    <p>
-                        <a href="#" class="profile-action add-friend">
-                            <i class="fa fa-user-plus" aria-hidden="true"></i> Add Friend
-                        </a>
-                    </p>
+                    {{#if canInvite}}
+                        <p>
+                            <a href="#" class="profile-action add-friend">
+                                <i class="fa fa-user-plus" aria-hidden="true"></i> Add Friend
+                            </a>
+                        </p>
+                    {{else}}
+                        <p>Friend request already sent</p>
+                    {{/if}}
                     <p>
                         <a href="#" class="profile-action send-msg">
                             <i class="fa fa-envelope" aria-hidden="true"></i> Send Message

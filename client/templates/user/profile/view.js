@@ -14,6 +14,10 @@ Template.user_profile_view.onCreated(function () {
 
             userId ? document.title = `MSN - ${user.profile.firstname} ${user.profile.lastname}` : document.title = 'MSN - My Profile';
         });
+
+        if (userId) {
+            let friendStatus = this.subscribe('friendStatus', userId);
+        }
     }.bind(Template.instance()));
 });
 
@@ -23,6 +27,8 @@ Template.user_profile_view.events({
         Meteor.call('sendFriendRequest', this._id, function (error, result) {
             if (!error) {
                 console.log(`Request sent ${result}`);
+            } else {
+                console.log(error);
             }
         });
     }
@@ -53,5 +59,14 @@ Template.user_profile_view.helpers({
         var userId = FlowRouter.getParam('userId');
 
         return !userId;
+    },
+
+    /**
+     * Check if friend request can be sent.
+     *
+     * @returns {Boolean}
+     */
+    canInvite: function () {
+        return !Requests.findOne({ 'isPending' : true });
     }
 });

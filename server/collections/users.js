@@ -1,5 +1,5 @@
 /**
- * User collection publications.
+ * User collection publications and server methods.
  */
 
 /**
@@ -90,5 +90,16 @@ Meteor.methods({
                 'profile.lastname'  : 1
             }
         }).fetch();
+    },
+
+    /* TODO: Create a publication for active user, sub to it and remove this */
+    getUserInfo: function () {
+        if (!Meteor.user()) {
+            return {};
+        }
+
+        let user = Meteor.users.findOne(Meteor.userId());
+
+        return user.profile;
     }
 });
