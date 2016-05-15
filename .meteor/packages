@@ -21,3 +21,4 @@ fortawesome:fontawesome         # Font Awesome packaged for Meteor.js.
 momentjs:moment                 # Moment.js (official): parse, validate, manipulate, and display dates
 tsega:bootstrap3-datetimepicker # Bootstrap 3 DateTime picker
 underscore                      # Collection of small helpers
+msavin:mongol                   # In-App MongoDB Editor (Control + M to toggle)
