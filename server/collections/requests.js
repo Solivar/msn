@@ -23,7 +23,7 @@ Meteor.publish('friendRequests', function () {
 /**
  * Publish collection with friendship request status of current user.
  * 
- * @param userId User id whose profile is being viewed.
+ * @param userId User _id whose profile is being viewed.
  */
 Meteor.publish('friendStatus', function (userId) {
     let friendStatus = Requests.find( {
@@ -45,13 +45,19 @@ Meteor.methods({
     /**
      * Send a friend friends to a user.
      *
-     * @param userId User id that is going to be invited
+     * @param userId User _id that is going to be invited.
      */
     sendFriendRequest: function (userId) {
         if (!this.userId) {
             throw new Meteor.Error(401, 'You must be logged in');
         } else if (!userId) {
             throw new Meteor.Error(400, 'Friend request is already pending');
+        }
+
+        let friendship = Meteor.call('checkFriendship', userId);
+
+        if (friendship) {
+            throw new Meteor.Error(400, 'You are already friends with this user');
         }
 
         let alreadyInvited = Requests.findOne({
@@ -70,10 +76,11 @@ Meteor.methods({
             'isPending' : true
         });
     },
-    
+
     /**
+     * Accept a friend requests from a user.
      *
-     * @param userId _id
+     * @param userId Inviting user_id
      */
     acceptFriendRequest: function (userId) {
         if (!this.userId) {

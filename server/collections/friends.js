@@ -7,8 +7,9 @@
  */
 Meteor.methods({
     /**
-     * 
-     * @param userId _id
+     * Add the user who requested friendship as friend.
+     *
+     * @param userId Inviting user _id.
      * @returns {String} _id
      */
     addFriend: function (userId) {
@@ -18,11 +19,7 @@ Meteor.methods({
             throw new Meteor.Error(400, 'Accepting a friend request requires an inviter');
         }
 
-
-        let friendship =  Friends.findOne({
-            'inviter'   : { $in : [userId, this.userId] },
-            'addressee' : { $in : [userId, this.userId] }
-        });
+        let friendship = Meteor.call('checkFriendship', userId);
 
         if (friendship) {
             throw new Meteor.Error(400, 'You are already friends with this user');
@@ -31,6 +28,19 @@ Meteor.methods({
         return Friends.insert({
             'inviter'   : userId,
             'addressee' : this.userId
+        });
+    },
+
+    /**
+     * Check if a friendship already exists between two users.
+     *
+     * @param userId The other user _id in a friendship
+     * @returns {Object}
+     */
+    checkFriendship: function (userId) {
+        return Friends.findOne({
+            'inviter'   : { $in : [userId, this.userId] },
+            'addressee' : { $in : [userId, this.userId] }
         });
     }
 });
