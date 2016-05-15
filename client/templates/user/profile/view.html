@@ -28,7 +28,19 @@
                             </a>
                         </p>
                     {{else}}
-                        <p>Friend request already sent</p>
+                        {{#if canAccept}}
+                            <p>Pending friend request</p>
+                            <p>
+                                <a href="#" class="profile-action action-accept">
+                                    <i class="fa fa-check" aria-hidden="true"></i>Accept
+                                </a>
+                                <a href="#" class="action-deny">
+                                    <i class="fa fa-times" aria-hidden="true"></i>Deny
+                                </a>
+                            </p>
+                        {{else}}
+                            <p>Friend request already sent</p>
+                        {{/if}}
                     {{/if}}
                     <p>
                         <a href="#" class="profile-action send-msg">

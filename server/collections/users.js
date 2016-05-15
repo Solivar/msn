@@ -101,5 +101,25 @@ Meteor.methods({
         let user = Meteor.users.findOne(Meteor.userId());
 
         return user.profile;
+    },
+
+    /**
+     * Get the profile information of requested users.
+     *
+     * @param userIds User ids whose profile information is needed
+     * @returns {Array}
+     */
+    getRequestedUsers: function (userIds) {
+        if (!userIds) {
+            return;
+        }
+
+        return Meteor.users.find(
+            { '_id' : { $in : userIds } },
+            { fields : {
+                'profile.firstname' : 1,
+                'profile.lastname'  : 1
+            } }
+        ).fetch();
     }
 });

@@ -3,25 +3,25 @@
  */
 
 /**
- * Publish collection with user friend friends.
+ * Publish collection with user friends.
  */
 Meteor.publish('friendRequests', function () {
     let friendRequests = Requests.find({
         $or: [
-            { inviter: this.userId },
-            { user: this.userId }
+            { 'inviter' : this.userId },
+            { 'user'    : this.userId }
         ]
     });
 
     if (friendRequests) {
-        return users;
+        return friendRequests;
     }
 
     return this.ready();
 });
 
 /**
- * Publish collection with friendship status of current user.
+ * Publish collection with friendship request status of current user.
  * 
  * @param userId User id whose profile is being viewed.
  */

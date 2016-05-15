@@ -7,16 +7,16 @@ Template.user_profile_view.onCreated(function () {
      * which causes problems when navigating from on user profile to another.
      */
     this.autorun(function () {
-        let userId = FlowRouter.getParam('userId');
+        this.userId = FlowRouter.getParam('userId');
 
-        this.subscribe('userProfile', userId, function () {
-            let user = userId ? Meteor.users.findOne({ _id : userId }) : Meteor.users.findOne({ _id : Meteor.userId() });
+        this.subscribe('userProfile', this.userId, () => {
+            let user = this.userId ? Meteor.users.findOne({ _id : this.userId }) : Meteor.users.findOne({ _id : Meteor.userId() });
 
-            userId ? document.title = `MSN - ${user.profile.firstname} ${user.profile.lastname}` : document.title = 'MSN - My Profile';
+            this.userId ? document.title = `MSN - ${user.profile.firstname} ${user.profile.lastname}` : document.title = 'MSN - My Profile';
         });
 
-        if (userId) {
-            let friendStatus = this.subscribe('friendStatus', userId);
+        if (this.userId) {
+            let friendStatus = this.subscribe('friendStatus', this.userId);
         }
     }.bind(Template.instance()));
 });
@@ -41,10 +41,10 @@ Template.user_profile_view.helpers({
      * @returns {Object}
      */
     getUser: function () {
-        var userId = FlowRouter.getParam('userId');
+        let template = Template.instance();
 
-        if (userId) {
-            return Meteor.users.findOne({ _id : userId });
+        if (template.userId) {
+            return Meteor.users.findOne({ _id : template.userId });
         }
 
         return Meteor.users.findOne({ _id : Meteor.userId() });
@@ -53,12 +53,10 @@ Template.user_profile_view.helpers({
     /**
      * Check if user is viewing their own profile.
      *
-     * @returns {String}
+     * @returns {Boolean}
      */
     isMyProfile: function () {
-        var userId = FlowRouter.getParam('userId');
-
-        return !userId;
+        return !Template.instance().userId;
     },
 
     /**
@@ -68,5 +66,20 @@ Template.user_profile_view.helpers({
      */
     canInvite: function () {
         return !Requests.findOne({ 'isPending' : true });
+    },
+
+    /**
+     * Check if user that is being viewed has sent current user a friend request.
+     *
+     * @returns {Object | Boolean}
+     */
+    canAccept: function () {
+        let template = Template.instance();
+
+        if (template.userId) {
+            return Requests.findOne({ 'isPending' : true, 'inviter' : template.userId });
+        }
+
+        return false;
     }
 });

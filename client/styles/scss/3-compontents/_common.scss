@@ -20,6 +20,7 @@ header {
   }
 }
 
+/* Page navigation */
 nav {
   .nav-tabs > li {
     > a, a:hover, a:focus, a:active {
@@ -45,6 +46,7 @@ nav {
   }
 }
 
+/* Page content container */
 main {
   &.container {
     padding: 10px 0;
@@ -61,6 +63,7 @@ main {
   }
 }
 
+/* Horizontally and vertically centered container */
 .centered-wrapper {
   display: flex;
   justify-content: center;

@@ -1,0 +1,24 @@
+<!--
+/**
+ * Friends requests template.
+ */
+-->
+<template name="friends_requests_view">
+    <div class="row">
+        <div class="col-sm-12 col-xs-10 latest-users">
+            <h2>Incoming friend requests</h2>
+            {{#each getIncomingRequests}}
+                <p><a href="{{profileUrl _id}}">{{profile.firstname}} {{profile.lastname}}</a></p>
+            {{/each}}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12 col-xs-10 latest-users">
+            <h2>Outgoing friend requests</h2>
+            {{#each getOutgoingRequests}}
+                <p><a href="{{profileUrl _id}}">{{profile.firstname}} {{profile.lastname}}</a></p>
+            {{/each}}
+        </div>
+    </div>
+</template>

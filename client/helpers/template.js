@@ -26,3 +26,14 @@ Template.registerHelper('profileUrl', (userId) => {
 
     return FlowRouter.path('user-profile', { 'userId' : userId });
 });
+
+/**
+ * Check if given values are equal.
+ *
+ * @param {Value}
+ * @param {Value}
+ * @returns {Boolean}
+ */
+Template.registerHelper('equals', (a, b) => {
+    return a === b;
+});

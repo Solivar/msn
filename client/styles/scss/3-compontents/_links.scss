@@ -1,12 +1,19 @@
 /* Styles for links. */
 
-.profile-page {
-  .profile-action {
-    color: $c-green;
+.profile-action {
+  color: $c-green;
 
-    &:hover,
-    &:active {
-      color: $c-black;
-    }
+  &:hover,
+  &:active {
+    color: $c-black;
+  }
+}
+
+.action-deny {
+  color: $c-red;
+
+  &:hover,
+  &:active {
+    color: $c-black;
   }
 }
