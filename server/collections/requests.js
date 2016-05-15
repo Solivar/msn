@@ -8,8 +8,8 @@
 Meteor.publish('friendRequests', function () {
     let friendRequests = Requests.find({
         $or: [
-            { 'inviter' : this.userId },
-            { 'user'    : this.userId }
+            { 'inviter'   : this.userId },
+            { 'addressee' : this.userId }
         ]
     });
 
@@ -28,7 +28,7 @@ Meteor.publish('friendRequests', function () {
 Meteor.publish('friendStatus', function (userId) {
     let friendStatus = Requests.find( {
         'inviter'   : { $in : [userId, this.userId] },
-        'user'      : { $in : [userId, this.userId] }
+        'addressee' : { $in : [userId, this.userId] }
     });
 
     if (friendStatus) {
@@ -49,12 +49,14 @@ Meteor.methods({
      */
     sendFriendRequest: function (userId) {
         if (!this.userId) {
-            return;
+            throw new Meteor.Error(401, 'You must be logged in');
+        } else if (!userId) {
+            throw new Meteor.Error(400, 'Friend request is already pending');
         }
 
         let alreadyInvited = Requests.findOne({
-            'inviter'   : this.userId,
-            'user'      : userId,
+            'inviter'   : { $in : [userId, this.userId] },
+            'addressee' : { $in : [userId, this.userId] },
             'isPending' : true
         });
         
@@ -64,8 +66,38 @@ Meteor.methods({
 
         return Requests.insert({
             'inviter'   : this.userId,
-            'user'      : userId,
+            'addressee' : userId,
             'isPending' : true
+        });
+    },
+    
+    /**
+     *
+     * @param userId _id
+     */
+    acceptFriendRequest: function (userId) {
+        if (!this.userId) {
+            throw new Meteor.Error(401, 'You must be logged in');
+        } else if (!userId) {
+            throw new Meteor.Error(400, 'Accepting a friend request requires an inviter');
+        }
+
+        Meteor.call('addFriend', userId, (error, result) => {
+            if (!error && result) {
+                let activeRequest = Requests.findOne({
+                    'inviter'   : userId,
+                    'addressee' : this.userId,
+                    'isPending' : true
+                });
+
+                Requests.update(activeRequest._id, {
+                    $set : {
+                        'isPending' : false
+                    }
+                });
+            } else if (error) {
+                console.log(error);
+            }
         });
     }
 });

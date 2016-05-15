@@ -61,7 +61,11 @@ Template.search_view.helpers({
 });
 
 Template.search_view.events({
-
+    /**
+     * Search users.
+     *
+     * @param {Object} e Event
+     */
     'submit #search-form': function (e) {
         e.preventDefault();
         //Template.instance().searchInitialized.set(true);

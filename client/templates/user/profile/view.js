@@ -4,7 +4,7 @@
 Template.user_profile_view.onCreated(function () {
     /* Run Tracker autorun to ensure that the document.title and subscription gets updated
      * because FlowRouter does not re-render templates on parameter change
-     * which causes problems when navigating from on user profile to another.
+     * which causes problems when navigating from one user profile to another.
      */
     this.autorun(function () {
         this.userId = FlowRouter.getParam('userId');
@@ -22,15 +22,26 @@ Template.user_profile_view.onCreated(function () {
 });
 
 Template.user_profile_view.events({
-    'click .add-friend': function () {
-        /* this represents current user document */
-        Meteor.call('sendFriendRequest', this._id, function (error, result) {
-            if (!error) {
-                console.log(`Request sent ${result}`);
-            } else {
-                console.log(error);
-            }
-        });
+    /**
+     * Send a friend request.
+     *
+     * @param {Object} e Event
+     */
+    'click .request-friend': function (e) {
+        e.preventDefault();
+
+        Meteor.call('sendFriendRequest', this._id);
+    },
+
+    /**
+     * Accept a friend request.
+     *
+     * @param {Object} e Event
+     */
+    'click .action-accept': function (e) {
+        e.preventDefault();
+
+        Meteor.call('acceptFriendRequest', this._id);
     }
 });
 

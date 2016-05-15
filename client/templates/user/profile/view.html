@@ -20,34 +20,34 @@
                     {{/if}}
                 </div>
                 {{#unless isMyProfile}}
-                <div class="col-sm-4">
-                    {{#if canInvite}}
-                        <p>
-                            <a href="#" class="profile-action add-friend">
-                                <i class="fa fa-user-plus" aria-hidden="true"></i> Add Friend
-                            </a>
-                        </p>
-                    {{else}}
-                        {{#if canAccept}}
-                            <p>Pending friend request</p>
+                    <div class="col-sm-4">
+                        {{#if canInvite}}
                             <p>
-                                <a href="#" class="profile-action action-accept">
-                                    <i class="fa fa-check" aria-hidden="true"></i>Accept
-                                </a>
-                                <a href="#" class="action-deny">
-                                    <i class="fa fa-times" aria-hidden="true"></i>Deny
+                                <a href="#" class="profile-action request-friend">
+                                    <i class="fa fa-user-plus" aria-hidden="true"></i> Add Friend
                                 </a>
                             </p>
                         {{else}}
-                            <p>Friend request already sent</p>
+                            {{#if canAccept}}
+                                <p>Pending friend request</p>
+                                <p>
+                                    <a href="#" class="profile-action action-accept">
+                                        <i class="fa fa-check" aria-hidden="true"></i>Accept
+                                    </a>
+                                    <a href="#" class="action-deny">
+                                        <i class="fa fa-times" aria-hidden="true"></i>Deny
+                                    </a>
+                                </p>
+                            {{else}}
+                                <p>Friend request already sent</p>
+                            {{/if}}
                         {{/if}}
-                    {{/if}}
-                    <p>
-                        <a href="#" class="profile-action send-msg">
-                            <i class="fa fa-envelope" aria-hidden="true"></i> Send Message
-                        </a>
-                    </p>
-                </div>
+                        <p>
+                            <a href="#" class="profile-action send-msg">
+                                <i class="fa fa-envelope" aria-hidden="true"></i> Send Message
+                            </a>
+                        </p>
+                    </div>
                 {{/unless}}
             </div>
         {{/with}}

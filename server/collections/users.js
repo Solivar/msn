@@ -59,8 +59,8 @@ Meteor.methods({
      * @param userData
      */
     changeUserInfo: function (userData) {
-        if (!Meteor.user()) {
-            return;
+        if (!this.userId) {
+            throw new Meteor.Error(401, 'You must be logged in');
         }
 
         Meteor.users.update(Meteor.userId(), {
@@ -77,8 +77,8 @@ Meteor.methods({
      * @returns {Array}
      */
     searchUsers: function (name) {
-        if (!Meteor.user()) {
-            return;
+        if (!this.userId) {
+            throw new Meteor.Error(401, 'You must be logged in');
         }
 
         /* TODO: Save user firstname and lastname in lowercase and search in lowercase too */
@@ -110,8 +110,8 @@ Meteor.methods({
      * @returns {Array}
      */
     getRequestedUsers: function (userIds) {
-        if (!userIds) {
-            return;
+        if (!this.userId) {
+            throw new Meteor.Error(401, 'You must be logged in');
         }
 
         return Meteor.users.find(
