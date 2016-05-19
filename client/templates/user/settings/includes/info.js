@@ -58,7 +58,8 @@ Template.user_settings_includes_info.events({
         _.each(inputDataArray, function (entity) {
             /* Date of birth needs to be formatted */
             if (entity.name === 'dob') {
-                entity.value = $('#user-info-form-dob').data('DateTimePicker').date().format();
+                let dob = $('#user-info-form-dob').data('DateTimePicker').date().format();
+                entity.value = new Date(dob);
             }
 
             userData[entity.name] = entity.value;

@@ -30,8 +30,8 @@ Template.registerHelper('profileUrl', (userId) => {
 /**
  * Check if given values are equal.
  *
- * @param {Value}
- * @param {Value}
+ * @param {String|Number}
+ * @param {String|Number}
  * @returns {Boolean}
  */
 Template.registerHelper('equals', (a, b) => {
