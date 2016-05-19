@@ -22,3 +22,4 @@ momentjs:moment                 # Moment.js (official): parse, validate, manipul
 tsega:bootstrap3-datetimepicker # Bootstrap 3 DateTime picker
 underscore                      # Collection of small helpers
 msavin:mongol                   # In-App MongoDB Editor (Control + M to toggle)
+aldeed:collection2              # Automatic validation of insert and update operations on the client and server
