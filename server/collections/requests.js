@@ -81,7 +81,7 @@ Meteor.methods({
     /**
      * Accept a friend requests from a user.
      *
-     * @param userId Inviting user_id
+     * @param userId Inviting user _id
      */
     acceptFriendRequest: function (userId) {
         if (!this.userId) {
@@ -92,11 +92,7 @@ Meteor.methods({
 
         Meteor.call('addFriend', userId, (error, result) => {
             if (!error && result) {
-                let activeRequest = Requests.findOne({
-                    'inviter'   : userId,
-                    'addressee' : this.userId,
-                    'isPending' : true
-                });
+                let activeRequest = Meteor.call('getActiveRequest', userId);
 
                 Requests.update(activeRequest._id, {
                     $set : {
@@ -106,6 +102,41 @@ Meteor.methods({
             } else if (error) {
                 console.log(error);
             }
+        });
+    },
+
+    /**
+     * Deny a friend request from a user.
+     *
+     * @param userId Inviting user _id
+     */
+    denyFriendRequest: function (userId) {
+        if (!this.userId) {
+            throw new Meteor.Error(401, 'You must be logged in');
+        } else if (!userId) {
+            throw new Meteor.Error(400, 'Denying a friend request requires an inviter');
+        }
+
+        let activeRequest = Meteor.call('getActiveRequest', userId);
+
+        Requests.update(activeRequest._id, {
+            $set : {
+                'isPending' : false
+            }
+        });
+    },
+
+    /**
+     * Get pending friend request between two users.
+     *
+     * @param userId Inviting user _id
+     * @returns {Object}
+     */
+    getActiveRequest: function (userId) {
+        return Requests.findOne({
+            'inviter'   : userId,
+            'addressee' : this.userId,
+            'isPending' : true
         });
     }
 });

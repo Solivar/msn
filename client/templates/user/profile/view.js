@@ -42,6 +42,17 @@ Template.user_profile_view.events({
         e.preventDefault();
 
         Meteor.call('acceptFriendRequest', this._id);
+    },
+
+    /**
+     * Deny a friend request.
+     *
+     * @param {Object} e Event
+     */
+    'click .action-deny': function (e) {
+        e.preventDefault();
+
+        Meteor.call('denyFriendRequest', this._id);
     }
 });
 
