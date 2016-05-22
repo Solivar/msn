@@ -46,6 +46,7 @@ Meteor.methods({
      * Send a friend friends to a user.
      *
      * @param userId User _id that is going to be invited.
+     * @returns {String}
      */
     sendFriendRequest: function (userId) {
         if (!this.userId) {

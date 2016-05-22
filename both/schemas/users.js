@@ -51,28 +51,45 @@ Schema.UserProfile = new SimpleSchema({
 });
 
 Schema.User = new SimpleSchema({
-    emails: {
+    emails : {
         type : Array
     },
 
-    "emails.$": {
+    'emails.$' : {
         type : Object
     },
-    "emails.$.address": {
+
+    'emails.$.address' : {
         type  : String,
         regEx : SimpleSchema.RegEx.Email
     },
 
-    "emails.$.verified": {
+    'emails.$.verified' : {
         type : Boolean
+    },
+
+    services : {
+        type     : Object,
+        optional : true,
+        blackbox : true
+    },
+
+    profile : {
+        type : Schema.UserProfile
+    },
+
+    isBlocked : {
+        type     : Boolean,
+        optional : true
+    },
+
+    isAdmin : {
+        type     : Boolean,
+        optional : true
     },
 
     createdAt: {
         type : Date
-    },
-
-    profile: {
-        type : Schema.UserProfile
     }
 });
 
