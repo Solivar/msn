@@ -2,8 +2,6 @@
  * Friends requests template functions.
  */
 Template.friends_requests_view.onCreated(function () {
-    document.title = 'MSN - Friends';
-
     this.incomingRequests = new ReactiveVar([]);
     this.outgoingRequests = new ReactiveVar([]);
 
@@ -35,10 +33,6 @@ Template.friends_requests_view.onCreated(function () {
     });
 });
 
-Template.friends_requests_view.onRendered(function () {
-
-});
-
 Template.friends_requests_view.helpers({
     /**
      * Get a list of incoming friend requests.
@@ -57,8 +51,4 @@ Template.friends_requests_view.helpers({
     getOutgoingRequests: function () {
         return Template.instance().outgoingRequests.get();
     }
-});
-
-Template.friends_requests_view.events({
-
 });

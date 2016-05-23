@@ -3,6 +3,25 @@
  */
 
 /**
+ * Publish collection with user friends.
+ */
+Meteor.publish('friends', function () {
+    let friends = Friends.find({
+        $or: [
+            { 'inviter'   : this.userId },
+            { 'addressee' : this.userId }
+        ],
+        'isActive' : { $ne : false }
+    });
+
+    if (friends) {
+        return friends;
+    }
+
+    return this.ready();
+});
+
+/**
  * Friends server side methods.
  */
 Meteor.methods({

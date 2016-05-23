@@ -3,7 +3,7 @@
  */
 
 /**
- * Publish collection with user friends.
+ * Publish collection with user friend request.
  */
 Meteor.publish('friendRequests', function () {
     let friendRequests = Requests.find({
@@ -52,7 +52,7 @@ Meteor.methods({
         if (!this.userId) {
             throw new Meteor.Error(401, 'You must be logged in');
         } else if (!userId) {
-            throw new Meteor.Error(400, 'Friend request is already pending');
+            throw new Meteor.Error(400, 'Friend request required an addressee');
         }
 
         let friendship = Meteor.call('checkFriendship', userId);
