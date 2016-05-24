@@ -6,7 +6,12 @@ Schema = {};
 
 
 Schema.ProfileMessages = new SimpleSchema({
-    user : {
+    author : {
+        type  : String,
+        regEx : SimpleSchema.RegEx.Id
+    },
+
+    addressee : {
         type  : String,
         regEx : SimpleSchema.RegEx.Id
     },

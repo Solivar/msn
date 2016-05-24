@@ -8,7 +8,7 @@ Template.user_settings_includes_info.onCreated(function () {
 Template.user_settings_includes_info.onRendered(function () {
     Meteor.call('getUserInfo', function (error, result) {
         if (!error) {
-            const maxDate = moment().subtract(4, 'years');
+            const maxDate   = moment().subtract(4, 'years');
             let defaultDate = maxDate;
 
             _.each(result, function (value, key) {
@@ -25,7 +25,7 @@ Template.user_settings_includes_info.onRendered(function () {
                             break;
                     }
                 } else if (key === 'dob') {
-                    /* If age is not set use max allowed date as default */
+                    /* Use age that is set instead of maxDate as default */
                     defaultDate = new Date(value);
                 } else {
                     let selector = '#user-info-form-' + key;
