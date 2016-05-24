@@ -3,11 +3,33 @@
  */
 
 /**
+ * Publish collection with user profile messages.
+ */
+Meteor.publish('profileMessages', function (userId) {
+    let profileMessages = ProfileMessages.find({
+        'addressee' : userId,
+        'isDeleted' : { $ne : false }
+    });
+
+    if (profileMessages) {
+        return profileMessages;
+    }
+
+    return this.ready();
+});
+
+/**
  * Profile messages server side methods.
  */
 Meteor.methods({
+    /**
+     * Add a message in a user profile.
+     *
+     * @param {String} userId Addressee user ID
+     * @param {String} message
+     * @returns {String} Profile message ID
+     */
     addProfileMessage: function (userId, message) {
-        console.log(message.trim().length);
         if (!this.userId) {
             throw new Meteor.Error(401, 'You must be logged in');
         } else if (!userId) {

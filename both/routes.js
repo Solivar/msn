@@ -5,6 +5,7 @@ var privateRoutes = FlowRouter.group({
             BlazeLayout.setRoot('body');
 
             if (!Meteor.userId()) {
+                Session.set('loginRedirect', context.path);
                 return redirect('login');
             }
         }
@@ -61,7 +62,15 @@ guestOnlyRoutes.route('/login', {
     name: 'login',
     action: function () {
         BlazeLayout.render('login_view');
-    }
+    },
+    triggersExit: [
+        function (context, redirect) {
+            if (Session.get('loginRedirect')) {
+                redirect(Session.get('loginRedirect'));
+                delete Session.keys['loginRedirect'];
+            }
+        }
+    ]
 });
 
 /**

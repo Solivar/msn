@@ -28,7 +28,7 @@ Meteor.methods({
     /**
      * Add the user who requested friendship as friend.
      *
-     * @param userId Inviting user _id.
+     * @param {String} userId Inviting user _id.
      * @returns {String} _id
      */
     addFriend: function (userId) {
@@ -53,7 +53,7 @@ Meteor.methods({
     /**
      * Check if a friendship already exists between two users.
      *
-     * @param userId The other user _id in a friendship
+     * @param {String} userId The other user _id in a friendship
      * @returns {Object}
      */
     checkFriendship: function (userId) {

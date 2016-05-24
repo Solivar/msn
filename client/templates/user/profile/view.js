@@ -3,7 +3,7 @@
  */
 Template.user_profile_view.onCreated(function () {
     /* Run Tracker autorun to ensure that the document.title and subscription gets updated
-     * because FlowRouter does not re-render templates on parameter change
+     * because FlowRouter does not re-render templates on route parameter change
      * which causes problems when navigating from one user profile to another.
      */
     this.autorun(function () {

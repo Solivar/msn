@@ -1,0 +1,14 @@
+<!--
+/**
+ * User profile message list template.
+ */
+-->
+<template name="user_profile_message_list">
+    <div class="row">
+        {{#each getMessages}}
+            <div class="col-sm-12">
+                <p>{{message}}</p>
+            </div>
+        {{/each}}
+    </div>
+</template>
