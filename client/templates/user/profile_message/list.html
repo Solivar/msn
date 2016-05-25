@@ -12,7 +12,14 @@
                         <p>{{message}}</p>
                     </div>
                     <footer>
-                        <p><a href="{{profileUrl author}}">{{firstname}} {{lastname}}</a></p>
+                        <div class="col-sm-8">
+                            <p><a href="{{profileUrl author}}">{{firstname}} {{lastname}}</a></p>
+                        </div>
+                        {{#if isProfileOwner}}
+                            <div class="col-sm-4">
+                                <a href="#" class="remove-message">Remove</a>
+                            </div>
+                        {{/if}}
                     </footer>
                 </section>
             </div>

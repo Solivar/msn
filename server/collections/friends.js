@@ -59,7 +59,8 @@ Meteor.methods({
     checkFriendship: function (userId) {
         return Friends.findOne({
             'inviter'   : { $in : [userId, this.userId] },
-            'addressee' : { $in : [userId, this.userId] }
+            'addressee' : { $in : [userId, this.userId] },
+            'isActive'  : { $ne : false }
         });
     }
 });
