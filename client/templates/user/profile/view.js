@@ -53,6 +53,12 @@ Template.user_profile_view.events({
         e.preventDefault();
 
         Meteor.call('denyFriendRequest', this._id);
+    },
+
+    'click .action-ban': function (e) {
+        e.preventDefault();
+
+        Meteor.call('toggleUserBan', this._id);
     }
 });
 

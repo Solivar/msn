@@ -9,7 +9,8 @@
   }
 }
 
-.action-deny {
+.action-deny,
+.action-ban {
   color: $c-red;
 
   &:hover,

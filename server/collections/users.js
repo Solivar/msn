@@ -121,5 +121,41 @@ Meteor.methods({
                 'profile.lastname'  : 1
             } }
         ).fetch();
+    },
+
+    toggleUserBan: function (userId) {
+        if (!this.userId) {
+            throw new Meteor.Error(401, 'You must be logged in');
+        } else if (!userId) {
+            throw new Meteor.Error(400, 'A user must be provided');
+        }
+
+        let user = Meteor.users.findOne(userId);
+
+        if (!user) {
+            throw new Meteor.Error(400, 'User not found');
+        }
+
+        if (_.has(user, 'isBlocked') && user.isBlocked === true) {
+            Meteor.users.update(user._id, {
+                $set : {
+                    isBlocked : false
+                }
+            })
+        } else {
+            Meteor.users.update(user._id, {
+                $set : {
+                    isBlocked : true
+                }
+            })
+        }
     }
+});
+
+Accounts.validateLoginAttempt(function(attemptData) {
+    if(attemptData.user.isBlocked) {
+        throw new Meteor.Error(403, 'You are banned');
+    }
+
+    return true;
 });
