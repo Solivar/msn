@@ -7,7 +7,14 @@
     <div class="row">
         {{#each getMessages}}
             <div class="col-sm-12">
-                <p>{{message}}</p>
+                <section class="profile-message">
+                    <div class="message-body">
+                        <p>{{message}}</p>
+                    </div>
+                    <footer>
+                        <p><a href="{{profileUrl author}}">{{firstname}} {{lastname}}</a></p>
+                    </footer>
+                </section>
             </div>
         {{/each}}
     </div>

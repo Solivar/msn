@@ -6,13 +6,36 @@ Template.user_profile_message_list.onCreated(function () {
     this.messages = new ReactiveVar([]);
 
     this.subscribe('profileMessages', this.userId, () => {
-        this.messages.set(ProfileMessages.find({}).fetch());
+        let profileMessages = ProfileMessages.find({}).fetch(),
+            authorIds       = _.uniq(_.pluck(profileMessages, 'author'));
+
+        Meteor.call('getRequestedUsers', authorIds, (error, result) => {
+            if (!error && result) {
+
+                /* Bind message author first and last name to the message object */
+                _.each(profileMessages, (message) => {
+                    _.each(result, (author) => {
+                        if (message.author === author._id) {
+                            _.extend(message, author.profile);
+                        }
+                    });
+                });
+
+                this.messages.set(profileMessages);
+            } else {
+                console.log(error);
+            }
+        });
     });
 });
 
 Template.user_profile_message_list.helpers({
+    /**
+     * Get user profile messages.
+     *
+     * @returns {Array}
+     */
     getMessages: function () {
-        console.log(Template.instance().messages.get());
         return Template.instance().messages.get();
     }
 });
