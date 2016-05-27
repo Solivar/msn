@@ -1,6 +1,11 @@
 /**
  * Base layout template functions.
  */
+
+Template.layouts_base.onCreated(function () {
+    //this.subscribe('userData');
+});
+
 Template.layouts_base.onRendered(function () {
     /**
      * Add active class to navigation element on route change.

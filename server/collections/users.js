@@ -10,7 +10,7 @@ Meteor.publish('userProfile', function (userId) {
         return [];
     }
 
-    let users = Meteor.users.find({ '_id' : userId }, {
+    let user = Meteor.users.find({ '_id' : userId }, {
         fields : {
             'profile.firstname' : 1,
             'profile.lastname'  : 1,
@@ -22,8 +22,8 @@ Meteor.publish('userProfile', function (userId) {
         }
     });
 
-    if (users) {
-        return users;
+    if (user) {
+        return user;
     }
 
     return this.ready();
@@ -40,6 +40,44 @@ Meteor.publish('latestUsers', function () {
         },
         sort   : { 'createdAt' : -1 },
         limit  : 20
+    });
+
+    if (users) {
+        return users;
+    }
+
+    return this.ready();
+});
+
+Meteor.publish('userData', function () {
+    let user = Meteor.users.find({ '_id' : this.userId }, {
+        fields : {
+            'profile.firstname' : 1,
+            'profile.lastname'  : 1,
+            'profile.dob'       : 1,
+            'profile.gender'    : 1,
+            'profile.country'   : 1,
+            'profile.city'      : 1,
+            'profile.about'     : 1,
+            'isAdmin'           : 1,
+            'isBlocked'         : 1
+        }
+    });
+
+    if (user) {
+        return user;
+    }
+
+    return this.ready();
+});
+
+Meteor.publish('bannedUsers', function () {
+    let users = Meteor.users.find({ 'isBlocked' : true }, {
+        fields : {
+            'profile.firstname' : 1,
+            'profile.lastname'  : 1,
+            'isBlocked'         : 1
+        }
     });
 
     if (users) {
@@ -123,11 +161,19 @@ Meteor.methods({
         ).fetch();
     },
 
-    toggleUserBan: function (userId) {
+    /**
+     * Either block or unblock user from system
+     * depending if they are currently blocked.
+     *
+     * @param userId
+     */
+    toggleUserBlock: function (userId) {
         if (!this.userId) {
             throw new Meteor.Error(401, 'You must be logged in');
         } else if (!userId) {
             throw new Meteor.Error(400, 'A user must be provided');
+        } else if (this.userId === userId) {
+            throw new Meteor.Error(400, 'You cannot block yourself');
         }
 
         let user = Meteor.users.findOne(userId);
@@ -150,12 +196,4 @@ Meteor.methods({
             })
         }
     }
-});
-
-Accounts.validateLoginAttempt(function(attemptData) {
-    if(attemptData.user.isBlocked) {
-        throw new Meteor.Error(403, 'You are banned');
-    }
-
-    return true;
 });

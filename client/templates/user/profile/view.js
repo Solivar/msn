@@ -58,7 +58,7 @@ Template.user_profile_view.events({
     'click .action-ban': function (e) {
         e.preventDefault();
 
-        Meteor.call('toggleUserBan', this._id);
+        Meteor.call('toggleUserBlock', this._id);
     }
 });
 

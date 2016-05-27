@@ -40,8 +40,6 @@ Meteor.methods({
 
         if (this.userId !== userId) {
             let friendship = Meteor.call('checkFriendship', userId);
-            console.log('tes');
-            console.log(friendship);
 
             if (!friendship) {
                 throw new Meteor.Error(400, 'You must be friends with this user to leave a profile message');
@@ -74,7 +72,6 @@ Meteor.methods({
         } else if (message.addressee !== this.userId) {
             throw new Meteor.Error(401, 'Permission denied');
         } else {
-            console.log(message._id);
             ProfileMessages.update(message._id, {
                 $set : {
                     'isDeleted' : true

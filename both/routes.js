@@ -1,7 +1,8 @@
 /* Only logged in users can access these routes */
-var privateRoutes = FlowRouter.group({
+let privateRoutes = FlowRouter.group({
     triggersEnter: [
         function (context, redirect) {
+            /* Render layouts in body element */
             BlazeLayout.setRoot('body');
 
             if (!Meteor.userId()) {
@@ -13,24 +14,56 @@ var privateRoutes = FlowRouter.group({
 });
 
 /* Everyone can access these routes */
-var publicRoutes = FlowRouter.group({
+let publicRoutes = FlowRouter.group({
     triggersEnter: [
         function () {
+            /* Render layouts in body element */
             BlazeLayout.setRoot('body');
         }
     ]
 });
 
 /* Only non-logged in users can access these roues */
-var guestOnlyRoutes = FlowRouter.group({
+let guestOnlyRoutes = FlowRouter.group({
     triggersEnter: [
         function (context, redirect) {
+            /* Render layouts in body element */
             BlazeLayout.setRoot('body');
             if (Meteor.userId()) {
                 return redirect('home');
             }
         }
     ]
+});
+
+let adminOnlyRoues = FlowRouter.group({
+    triggersEnter: [
+        function (context, redirect) {
+            /* Render layouts in body element */
+            BlazeLayout.setRoot('body');
+            if (!Meteor.userId()) {
+                Session.set('loginRedirect', context.path);
+                return redirect('login');
+            }
+        }
+    ]
+});
+
+adminOnlyRoues.route('/admin', {
+    name: 'admin',
+    action: function () {
+
+        /* Check if current user is an administrator */
+        Meteor.subscribe('userData', () => {
+            if (!Meteor.user().isAdmin) {
+                FlowRouter.go('404');
+            }
+        });
+
+        BlazeLayout.render('layouts_base', {
+            main: 'admin_blocked_users_view'
+        });
+    }
 });
 
 /**
@@ -107,7 +140,7 @@ publicRoutes.route('/logout', {
 });
 
 /* User settings related routes */
-var userSettingsRoutes = privateRoutes.group({
+let userSettingsRoutes = privateRoutes.group({
     prefix: '/settings',
     name: 'settings'
 });

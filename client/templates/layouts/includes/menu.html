@@ -17,6 +17,9 @@
             </li>
             <li id="friends" role="presentation"><a href="/friends">Friends</a></li>
             <li id="search" role="presentation"><a href="/search">Search</a></li>
+            {{#if isAdmin}}
+                <li id="admin" role="presentation"><a href="/admin">Admin</a></li>
+            {{/if}}
             <li id="logout" role="presentation" class="pull-right"><a href="/logout">Logout <i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
         </ul>
     </nav>

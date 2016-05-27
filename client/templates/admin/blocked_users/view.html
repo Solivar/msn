@@ -1,0 +1,15 @@
+<!--
+/**
+ * Admin blocked users template.
+ */
+-->
+<template name="admin_blocked_users_view">
+    <div class="row">
+        <div class="col-sm-12 col-xs-10 latest-users">
+            <h2>Blocked users</h2>
+            {{#each getBannedUsers}}
+                <p><a href="{{profileUrl _id}}">{{profile.firstname}} {{profile.lastname}}</a></p>
+            {{/each}}
+        </div>
+    </div>
+</template>
