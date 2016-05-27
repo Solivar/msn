@@ -62,5 +62,27 @@ Meteor.methods({
             'addressee' : { $in : [userId, this.userId] },
             'isActive'  : { $ne : false }
         });
+    },
+
+    removeFriend: function (userId) {
+        if (!this.userId) {
+            throw new Meteor.Error(401, 'You must be logged in');
+        } else if (!userId) {
+            throw new Meteor.Error(400, 'User must be provided');
+        }
+
+        let friendship = Meteor.call('checkFriendship', userId);
+
+        console.log(friendship);
+
+        if (!friendship) {
+            throw new Meteor.Error(400, 'You must be friends with this user');
+        }
+
+        Friends.update(friendship._id, {
+            $set : {
+                'isActive' : false
+            }
+        });
     }
 });

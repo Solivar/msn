@@ -165,7 +165,7 @@ Meteor.methods({
      * Either block or unblock user from system
      * depending if they are currently blocked.
      *
-     * @param userId
+     * @param {String} userId
      */
     toggleUserBlock: function (userId) {
         if (!this.userId) {
@@ -197,6 +197,11 @@ Meteor.methods({
         }
     },
 
+    /**
+     * Update user avatar.
+     *
+     * @param {String} imageUrl
+     */
     updateAvatar: function (imageUrl) {
         if (!this.userId) {
             throw new Meteor.Error(401, 'You must be logged in');

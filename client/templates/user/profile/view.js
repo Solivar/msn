@@ -55,10 +55,26 @@ Template.user_profile_view.events({
         Meteor.call('denyFriendRequest', this._id);
     },
 
+    /**
+     * Toggle user block state.
+     *
+     * @param {Object} e Event
+     */
     'click .action-ban': function (e) {
         e.preventDefault();
 
         Meteor.call('toggleUserBlock', this._id);
+    },
+
+    /**
+     * Remove user as a friend.
+     *
+     * @param {Object} e Event
+     */
+    'click .action-unfriend': function (e) {
+        e.preventDefault();
+
+        Meteor.call('removeFriend', this._id);
     }
 });
 
