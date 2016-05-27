@@ -64,6 +64,11 @@ Meteor.methods({
         });
     },
 
+    /**
+     * Stop friendship with a user.
+     *
+     * @param {String} userId
+     */
     removeFriend: function (userId) {
         if (!this.userId) {
             throw new Meteor.Error(401, 'You must be logged in');
@@ -72,8 +77,6 @@ Meteor.methods({
         }
 
         let friendship = Meteor.call('checkFriendship', userId);
-
-        console.log(friendship);
 
         if (!friendship) {
             throw new Meteor.Error(400, 'You must be friends with this user');

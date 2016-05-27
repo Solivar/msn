@@ -46,11 +46,16 @@ Template.user_profile_message_list.helpers({
      * @returns {Boolean}
      */
     isProfileOwner: function () {
-        return Template.instance().data.userId === Meteor.userId();
+        return Template.instance().data.userId === Meteor.userId() || Meteor.user().isAdmin;
     }
 });
 
 Template.user_profile_message_list.events({
+    /**
+     * Remove specified profile message.
+     *
+     * @param e
+     */
     'click .remove-message': function (e) {
         e.preventDefault();
 

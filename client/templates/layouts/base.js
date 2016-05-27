@@ -3,7 +3,7 @@
  */
 
 Template.layouts_base.onCreated(function () {
-    //this.subscribe('userData');
+    this.subscribe('userData');
 });
 
 Template.layouts_base.onRendered(function () {

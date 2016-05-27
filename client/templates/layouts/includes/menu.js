@@ -1,11 +1,6 @@
 /**
  * Menu layout includes functions.
  */
-
-Template.layouts_includes_menu.onCreated(function () {
-    this.subscribe('userData');
-});
-
 Template.layouts_includes_menu.helpers({
     /**
      * Check if user is admin.

@@ -65,12 +65,25 @@ Meteor.methods({
             throw new Meteor.Error(400, 'Removing a message requires its ID');
         }
 
-        let message = ProfileMessages.findOne(messageId);
+        let message = ProfileMessages.findOne(messageId),
+            user    = Meteor.users.findOne(this.userId, {
+                fields : {
+                    isAdmin : 1
+                }
+            });
 
         if (!message) {
-            throw new Meteor.Error(400, 'Message no found');
+            throw new Meteor.Error(400, 'Message not found');
         } else if (message.addressee !== this.userId) {
-            throw new Meteor.Error(401, 'Permission denied');
+            if (user.isAdmin) {
+                ProfileMessages.update(message._id, {
+                    $set : {
+                        'isDeleted' : true
+                    }
+                });
+            } else {
+                throw new Meteor.Error(401, 'Permission denied');
+            }
         } else {
             ProfileMessages.update(message._id, {
                 $set : {
