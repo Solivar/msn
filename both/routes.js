@@ -170,6 +170,19 @@ userSettingsRoutes.route('/info', {
 });
 
 /**
+ * Change user profile image route.
+ */
+userSettingsRoutes.route('/profile-image', {
+    name: 'settings-profile-image',
+    action: function () {
+        BlazeLayout.render('layouts_base', {
+            main: 'user_settings_includes_profile_image'
+        });
+    }
+});
+
+
+/**
  * User profile route.
  */
 privateRoutes.route('/profile/:userId', {

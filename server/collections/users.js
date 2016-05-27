@@ -195,5 +195,23 @@ Meteor.methods({
                 }
             })
         }
+    },
+
+    updateAvatar: function (imageUrl) {
+        if (!this.userId) {
+            throw new Meteor.Error(401, 'You must be logged in');
+        }
+
+        let user = Meteor.users.findOne(this.userId);
+
+        if (!user) {
+            throw new Meteor.Error(400, 'User not found');
+        }
+
+        Meteor.users.update(user._id, {
+            $set : {
+                avatar : imageUrl
+            }
+        });
     }
 });

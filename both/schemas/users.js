@@ -88,6 +88,11 @@ Schema.User = new SimpleSchema({
         optional : true
     },
 
+    avatar : {
+        type     : String,
+        optional : true
+    },
+
     createdAt: {
         type : Date
     }
