@@ -6,28 +6,34 @@ Template.user_profile_message_list.onCreated(function () {
     /* Passed from profile view as data */
     this.userId = this.data.userId;
 
-    this.subscribe('profileMessages', this.userId, () => {
-        let profileMessages = ProfileMessages.find({}).fetch(),
-            authorIds       = _.uniq(_.pluck(profileMessages, 'author'));
+    this.autorun(function () {
+        this.userId = FlowRouter.getParam('userId') ? FlowRouter.getParam('userId') : this.data.userId;
+        this.subscribe('profileMessages', this.userId, () => {
+            let profileMessages = ProfileMessages.find({ 'isDeleted' : { $ne : false }}, { sort : { 'createdAt' : -1 }}).fetch(),
+                authorIds       = _.uniq(_.pluck(profileMessages, 'author'));
 
-        Meteor.call('getRequestedUsers', authorIds, (error, result) => {
-            if (!error && result) {
+            Meteor.call('getRequestedUsers', authorIds, (error, result) => {
+                if (!error && result) {
 
-                /* Bind message author first and last name to the message object */
-                _.each(profileMessages, (message) => {
-                    _.each(result, (author) => {
-                        if (message.author === author._id) {
-                            _.extend(message, author.profile);
-                        }
+                    /* Bind message author first and last name to the message object
+                     * Binding data like this means that the data is not going to be
+                     * reactive within the template and page refresh will be necessary
+                     * to load data changes.
+                     */
+                    _.each(profileMessages, (message) => {
+                        _.each(result, (author) => {
+                            if (message.author === author._id) {
+                                _.extend(message, author.profile);
+                            }
+                        });
                     });
-                });
 
-                this.messages.set(profileMessages);
-            } else {
-                console.log(error);
-            }
+                    this.messages.set(profileMessages);
+                }
+            });
         });
-    });
+    }.bind(Template.instance()));
+
 });
 
 Template.user_profile_message_list.helpers({
@@ -59,12 +65,10 @@ Template.user_profile_message_list.events({
     'click .remove-message': function (e) {
         e.preventDefault();
 
-        console.log(this._id);
-
         /* this._id represents current message id in template */
         Meteor.call('removeProfileMessage', this._id, (error, result) => {
-            if (error) {
-                console.log(error);
+            if (!error) {
+                document.location.reload(true);
             }
         });
     }

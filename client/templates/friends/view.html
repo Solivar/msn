@@ -8,9 +8,22 @@
         <div class="row">
             <div class="col-sm-12 col-xs-10 latest-users">
                 <h2>Friends</h2>
-                {{#each getFriends}}
-                    <p><a href="{{profileUrl _id}}">{{profile.firstname}} {{profile.lastname}}</a></p>
-                {{/each}}
+                {{#if getFriends}}
+                    {{#each getFriends}}
+                        <div class="user-box">
+                            <a href="{{profileUrl _id}}">
+                                <div class="user-avatar">
+                                    <img src="{{avatar}}">
+                                </div>
+                                <div class="user-info">
+                                    {{profile.firstname}} {{profile.lastname}}
+                                </div>
+                            </a>
+                        </div>
+                    {{/each}}
+                {{else}}
+                    <p>No friends.</p>
+                {{/if}}
             </div>
         </div>
 

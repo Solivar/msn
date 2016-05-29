@@ -22,6 +22,24 @@ Meteor.publish('friends', function () {
 });
 
 /**
+ * Publish collection with user friend status.
+ * 
+ * @param userId User _id whose profile is being viewed.
+ */
+Meteor.publish('friendStatus', function (userId) {
+    let friendStatus = Friends.find({
+        'inviter'   : { $in : [userId, this.userId] },
+        'addressee' : { $in : [userId, this.userId] },
+    });
+
+    if (friendStatus) {
+        return friendStatus;
+    }
+
+    return this.ready();
+});
+
+/**
  * Friends server side methods.
  */
 Meteor.methods({
@@ -36,6 +54,8 @@ Meteor.methods({
             throw new Meteor.Error(401, 'You must be logged in');
         } else if (!userId) {
             throw new Meteor.Error(400, 'Accepting a friend request requires an inviter');
+        } else if (this.userId === userId) {
+            throw new Meteor.Error(400, 'Cannot become friends with yourself');
         }
 
         let friendship = Meteor.call('checkFriendship', userId);
@@ -57,7 +77,6 @@ Meteor.methods({
      * @returns {Object}
      */
     checkFriendship: function (userId) {
-        console.log(userId);
         return Friends.findOne({
             'inviter'   : { $in : [userId, this.userId] },
             'addressee' : { $in : [userId, this.userId] },

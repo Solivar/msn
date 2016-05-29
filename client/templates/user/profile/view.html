@@ -22,23 +22,20 @@
                     </div>
                 </div>
                 <div class="col-sm-6">
-                    <div class="{{#if isMyProfile}}col-sm-12{{else}}col-sm-8{{/if}}">
-                        <p>From: {{profile.city}} {{profile.country}}</p>
-                        <p>Age: {{dobToAge profile.dob}}</p>
-                        {{#if profile.about}}
-                            <p>{{profile.about}}</p>
+                    <div class="col-sm-12">
+                        {{#if profile.city}}
+                            <p>City: {{profile.city}}</p>
                         {{/if}}
+                        {{#if profile.country}}
+                            <p>Country: {{profile.country}}</p>
+                        {{/if}}
+                        <p>{{dobToAge profile.dob}}, {{profile.gender}}</p>
+                        <p>{{profile.about}}</p>
                     </div>
                     <div class="col-sm-12">
-                        {{#if canInvite}}
-                            <p>
-                                <a href="#" class="profile-action request-friend">
-                                    <i class="fa fa-user-plus" aria-hidden="true"></i> Add Friend
-                                </a>
-                            </p>
-                        {{else}}
+                        {{#if getRequest}}
+                            <p>Pending friend request</p>
                             {{#if canAccept}}
-                                <p>Pending friend request</p>
                                 <p>
                                     <a href="#" class="profile-action action-accept">
                                         <i class="fa fa-check" aria-hidden="true"></i>Accept
@@ -47,33 +44,36 @@
                                         <i class="fa fa-times" aria-hidden="true"></i>Deny
                                     </a>
                                 </p>
-                            {{else}}
-                                <p>Friend request already sent</p>
                             {{/if}}
                         {{/if}}
-                        {{#if equals canInvite 'none'}}
-                            <p>AAAAAAAAa</p>
-                        {{/if}}
-                        {{#if equals canInvite 'request'}}
-                            <p>TEEEEE</p>
-                        {{/if}}
-                        {{#if equals canInvite 'friend'}}
+
+                        {{#if getFriendship}}
                             <p>
                                 <a href="#" class="action-unfriend">
                                     <i class="fa fa-ban" aria-hidden="true"></i> Remove Friend
                                 </a>
                             </p>
                         {{/if}}
-                        <p>
-                            <a href="#" class="action-unfriend">
-                                <i class="fa fa-ban" aria-hidden="true"></i> Remove Friend
-                            </a>
-                        </p>
+
+                        {{#if canAddFriend}}
+                            <p>
+                                <a href="#" class="profile-action request-friend">
+                                    <i class="fa fa-user-plus" aria-hidden="true"></i> Add Friend
+                                </a>
+                            </p>
+                        {{/if}}
+
+                        {{#if canBan}}
                         <p>
                             <a href="#" class="action-ban">
-                                <i class="fa fa-ban" aria-hidden="true"></i> Block User
+                                {{#if isBanned}}
+                                    <i class="fa fa-ban" aria-hidden="true"></i> Unblock User
+                                {{else}}
+                                    <i class="fa fa-ban" aria-hidden="true"></i> Block User
+                                {{/if}}
                             </a>
                         </p>
+                        {{/if}}
                     </div>
                 </div>
             </div>

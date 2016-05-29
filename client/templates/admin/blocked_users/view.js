@@ -3,17 +3,16 @@
  */
 
 Template.admin_blocked_users_view.onCreated(function () {
-    this.bannedUsers = new ReactiveVar([]);
-
-    this.subscribe('bannedUsers', () => {
-        this.bannedUsers.set(Meteor.users.find({ 'isBlocked' : true }).fetch());
-        console.log(Meteor.users.find({}).fetch());
-        console.log(this.bannedUsers.get());
-    });
+    this.subscribe('bannedUsers');
 });
 
 Template.admin_blocked_users_view.helpers({
+    /**
+     * Get a list of blocked users.
+     *
+     * @returns {Array}
+     */
     getBannedUsers: function () {
-        return Template.instance().bannedUsers.get();
+        return Meteor.users.find({ 'isBlocked' : true }).fetch();
     }
 });

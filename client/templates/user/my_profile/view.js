@@ -2,22 +2,14 @@
  * My profile template functions.
  */
 Template.user_my_profile_view.onCreated(function () {
-    /* Run Tracker autorun to ensure that the document.title and subscription gets updated
-     * because FlowRouter does not re-render templates on route parameter change
-     * which causes problems when navigating from one user profile to another.
-     */
     this.autorun(function () {
         this.userId = FlowRouter.getParam('userId');
 
         this.subscribe('userProfile', this.userId, () => {
-            let user = this.userId ? Meteor.users.findOne({ _id : this.userId }) : Meteor.users.findOne({ _id : Meteor.userId() });
+            let user = Meteor.users.findOne({ _id : Meteor.userId() });
 
-            this.userId ? document.title = `MSN - ${user.profile.firstname} ${user.profile.lastname}` : document.title = 'MSN - My Profile';
+            document.title = 'MSN - My Profile';
         });
-
-        if (this.userId) {
-            let friendStatus = this.subscribe('friendStatus', this.userId);
-        }
     }.bind(Template.instance()));
 });
 

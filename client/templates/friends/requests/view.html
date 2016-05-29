@@ -7,18 +7,44 @@
     <div class="row">
         <div class="col-sm-12 col-xs-10 latest-users">
             <h2>Incoming friend requests</h2>
-            {{#each getIncomingRequests}}
-                <p><a href="{{profileUrl _id}}">{{profile.firstname}} {{profile.lastname}}</a></p>
-            {{/each}}
+            {{#if getIncomingRequests}}
+                {{#each getIncomingRequests}}
+                    <div class="user-box">
+                        <a href="{{profileUrl _id}}">
+                            <div class="user-avatar">
+                                <img src="{{avatar}}">
+                            </div>
+                            <div class="user-info">
+                                {{profile.firstname}} {{profile.lastname}}
+                            </div>
+                        </a>
+                    </div>
+                {{/each}}
+            {{else}}
+                <p>No incoming requests.</p>
+            {{/if}}
         </div>
     </div>
 
     <div class="row">
         <div class="col-sm-12 col-xs-10 latest-users">
             <h2>Outgoing friend requests</h2>
-            {{#each getOutgoingRequests}}
-                <p><a href="{{profileUrl _id}}">{{profile.firstname}} {{profile.lastname}}</a></p>
-            {{/each}}
+            {{#if getOutgoingRequests}}
+                {{#each getOutgoingRequests}}
+                    <div class="user-box">
+                        <a href="{{profileUrl _id}}">
+                            <div class="user-avatar">
+                                <img src="{{avatar}}">
+                            </div>
+                            <div class="user-info">
+                                {{profile.firstname}} {{profile.lastname}}
+                            </div>
+                        </a>
+                    </div>
+                {{/each}}
+            {{else}}
+                <p>No outgoing requests.</p>
+            {{/if}}
         </div>
     </div>
 </template>

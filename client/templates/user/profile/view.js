@@ -10,16 +10,13 @@ Template.user_profile_view.onCreated(function () {
         this.userId = FlowRouter.getParam('userId');
 
         this.subscribe('userProfile', this.userId, () => {
-            let user = this.userId ? Meteor.users.findOne({ _id : this.userId }) : Meteor.users.findOne({ _id : Meteor.userId() });
+            let user = Meteor.users.findOne({ _id : this.userId });
 
-            this.userId ? document.title = `MSN - ${user.profile.firstname} ${user.profile.lastname}` : document.title = 'MSN - My Profile';
+            document.title = `MSN - ${user.profile.firstname} ${user.profile.lastname}`;
         });
 
-        if (this.userId) {
-            let friendStatus = this.subscribe('friendStatus', this.userId);
-        }
-
-        this.subscribe('friends');
+        this.subscribe('requestStatus', this.userId);
+        this.subscribe('friendStatus', this.userId);
     }.bind(Template.instance()));
 });
 
@@ -87,23 +84,34 @@ Template.user_profile_view.helpers({
      * @returns {Object}
      */
     getUser: function () {
-        let template = Template.instance();
-
-        console.log(Meteor.users.findOne({ _id : template.userId }));
-        if (template.userId) {
-            return Meteor.users.findOne({ _id : template.userId });
-        }
-
-        return Meteor.users.findOne({ _id : Meteor.userId() });
+        return Meteor.users.findOne({ _id : Template.instance().userId });
     },
 
     /**
-     * Check if user is viewing their own profile.
+     * Check if user is friend.
      *
-     * @returns {Boolean}
+     * @returns {Object}
      */
-    isMyProfile: function () {
-        return !Template.instance().userId;
+    getFriendship: function () {
+        return Friends.findOne({ 'isActive' : { $ne : false } });
+    },
+
+    /**
+     * Check if friend request is already sent.
+     *
+     * @returns {Object}
+     */
+    getRequest: function () {
+        return Requests.findOne({ 'isPending' : true });
+    },
+
+    /**
+     * Check if user that is being viewed has sent current user a friend request.
+     *
+     * @returns {Object}
+     */
+    canAccept: function () {
+        return Requests.findOne({ 'isPending' : true, 'inviter' : Template.instance().userId });
     },
 
     /**
@@ -111,32 +119,22 @@ Template.user_profile_view.helpers({
      *
      * @returns {Boolean}
      */
-    canInvite: function () {
-        Meteor.call('checkFriendship', Template.instance().userId, (error, result) => {
-            let request = Requests.findOne({ 'isPending' : true });
-            
-            if (result) {
-                return 'friend';
-            } else if (request) {
-                return 'request';
-            }
-
-            return 'none';
-        });
+    canAddFriend: function () {
+        return !Friends.findOne({ 'isActive' : { $ne : false } }) && !Requests.findOne({ 'isPending' : true });
     },
 
     /**
-     * Check if user that is being viewed has sent current user a friend request.
-     *
-     * @returns {Object | Boolean}
+     * Check if current user is admin.
+     * 
+     * @returns {Boolean}
      */
-    canAccept: function () {
-        let template = Template.instance();
+    canBan: function () {
+        return Meteor.user().isAdmin;
+    },
 
-        if (template.userId) {
-            return Requests.findOne({ 'isPending' : true, 'inviter' : template.userId });
-        }
+    isBanned: function () {
+        let user = Meteor.users.findOne({ _id : Template.instance().userId });
 
-        return false;
+        return user.isBlocked;
     }
 });

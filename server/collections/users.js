@@ -19,7 +19,8 @@ Meteor.publish('userProfile', function (userId) {
             'profile.country'   : 1,
             'profile.city'      : 1,
             'profile.about'     : 1,
-            'avatar'            : 1
+            'avatar'            : 1,
+            'isBlocked'         : 1
         }
     });
 
@@ -170,7 +171,8 @@ Meteor.methods({
             { '_id' : { $in : userIds } },
             { fields : {
                 'profile.firstname' : 1,
-                'profile.lastname'  : 1
+                'profile.lastname'  : 1,
+                'avatar'            : 1
             } }
         ).fetch();
     },
@@ -203,9 +205,11 @@ Meteor.methods({
                 }
             })
         } else {
+            /* Emptying loginTokens to force user to logout from the system */
             Meteor.users.update(user._id, {
                 $set : {
-                    isBlocked : true
+                    'isBlocked' : true,
+                    'services.resume.loginTokens' : []
                 }
             })
         }

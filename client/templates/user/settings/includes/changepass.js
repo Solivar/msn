@@ -54,7 +54,7 @@ Template.user_settings_includes_changepass.events({
                 $('.error-changepass').text(error.reason);
             } else {
                 $('.error-changepass').text('');
-                $('#user-changepass-form').trigger("reset");
+                $('#user-changepass-form').trigger('reset');
             }
         });
     }

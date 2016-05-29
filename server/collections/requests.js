@@ -25,14 +25,14 @@ Meteor.publish('friendRequests', function () {
  * 
  * @param userId User _id whose profile is being viewed.
  */
-Meteor.publish('friendStatus', function (userId) {
-    let friendStatus = Requests.find( {
+Meteor.publish('requestStatus', function (userId) {
+    let requestStatus = Requests.find( {
         'inviter'   : { $in : [userId, this.userId] },
         'addressee' : { $in : [userId, this.userId] }
     });
 
-    if (friendStatus) {
-        return friendStatus;
+    if (requestStatus) {
+        return requestStatus;
     }
 
     return this.ready();
@@ -53,6 +53,8 @@ Meteor.methods({
             throw new Meteor.Error(401, 'You must be logged in');
         } else if (!userId) {
             throw new Meteor.Error(400, 'Friend request required an addressee');
+        } else if (this.userId === userId) {
+            throw new Meteor.Error(400, 'Cannot send friend request to yourself');
         }
 
         let friendship = Meteor.call('checkFriendship', userId);
@@ -99,8 +101,6 @@ Meteor.methods({
                         'isPending' : false
                     }
                 });
-            } else if (error) {
-                console.log(error);
             }
         });
     },
