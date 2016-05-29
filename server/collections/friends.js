@@ -57,6 +57,7 @@ Meteor.methods({
      * @returns {Object}
      */
     checkFriendship: function (userId) {
+        console.log(userId);
         return Friends.findOne({
             'inviter'   : { $in : [userId, this.userId] },
             'addressee' : { $in : [userId, this.userId] },

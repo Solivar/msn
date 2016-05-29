@@ -14,19 +14,71 @@ Template.register_view.onRendered(function () {
         defaultDate: maxDate,
         maxDate: maxDate
     });
+
+    /* jQuery Validation */
+    $('#user-register-form').validate({
+        rules : {
+            email : {
+                required : true,
+                email    : true
+            },
+            email_repeat : {
+                required : true,
+                email    : true,
+                equalTo  : '#user-register-form-email'
+            },
+            password : {
+                required : true
+            },
+            password_repeat : {
+                required : true,
+                equalTo  : '#user-register-form-password'
+            },
+            firstname : {
+                required : true
+            },
+            lastname : {
+                required : true
+            }
+        },
+
+        messages: {
+            email: {
+                required : 'Email is required',
+                email    : 'Must be a valid email address'
+            },
+            email_repeat : {
+                required : 'Repeated email is required',
+                email    : 'Must be a valid email address',
+                equalTo  : 'Emails must match'
+            },
+            password : {
+                required : 'Password is required'
+            },
+            password_repeat : {
+                required : 'Repeated password is required',
+                equalTo  : 'Passwords must match'
+            },
+            firstname : {
+                required : 'First name is required'
+            },
+            lastname : {
+                required : 'Last name is required'
+            }
+        }
+    });
 });
 
 Template.register_view.events({
     /**
      * Register user in the sytem.
      *
-     * @param e
+     * @param {Object} e Event
      */
     'submit #user-register-form': function (e) {
         e.preventDefault();
 
-        /* TODO: Validation */
-        let email = $('#user-register-form-email').val(),
+        let email    = $('#user-register-form-email').val(),
             password = $('#user-register-form-password').val();
 
         let inputDataArray = $('#user-register-form').find('[data-profile]').serializeArray(),
@@ -48,6 +100,8 @@ Template.register_view.events({
         }, function (error) {
             if (!error) {
                 FlowRouter.go('home');
+            } else {
+                $('.error-register').text(error.reason);
             }
         });
     }

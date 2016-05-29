@@ -93,7 +93,7 @@ Schema.User = new SimpleSchema({
         optional : true
     },
 
-    createdAt: {
+    createdAt : {
         type : Date
     }
 });

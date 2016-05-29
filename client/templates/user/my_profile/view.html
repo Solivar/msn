@@ -1,0 +1,62 @@
+<!--
+/**
+ * My profile template.
+ */
+-->
+<template name="user_my_profile_view">
+    <div class="profile-page">
+        {{#with getUser}}
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2>{{profile.firstname}} {{profile.lastname}}</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="{{#if isMyProfile}}col-sm-12{{else}}col-sm-8{{/if}}">
+                    <p>From: {{profile.city}}, {{profile.country}}</p>
+                    <p>Age: {{dobToAge profile.dob}}</p>
+                    {{#if profile.about}}
+                        <p>{{profile.about}}</p>
+                    {{/if}}
+                </div>
+                <div class="col-sm-4">
+                    {{#if canInvite}}
+                        <p>
+                            <a href="#" class="profile-action request-friend">
+                                <i class="fa fa-user-plus" aria-hidden="true"></i> Add Friend
+                            </a>
+                        </p>
+                    {{else}}
+                        {{#if canAccept}}
+                            <p>Pending friend request</p>
+                            <p>
+                                <a href="#" class="profile-action action-accept">
+                                    <i class="fa fa-check" aria-hidden="true"></i>Accept
+                                </a>
+                                <a href="#" class="action-deny">
+                                    <i class="fa fa-times" aria-hidden="true"></i>Deny
+                                </a>
+                            </p>
+                        {{else}}
+                            <p>Friend request already sent</p>
+                        {{/if}}
+                    {{/if}}
+                    <p>
+                        <a href="#" class="action-unfriend">
+                            <i class="fa fa-ban" aria-hidden="true"></i> Remove Friend
+                        </a>
+                    </p>
+                    <p>
+                        <a href="#" class="action-ban">
+                            <i class="fa fa-ban" aria-hidden="true"></i> Block User
+                        </a>
+                    </p>
+                </div>
+            </div>
+
+            {{> user_profile_message_view}}
+
+            {{> user_profile_message_list userId=_id}}
+        {{/with}}
+    </div>
+</template>

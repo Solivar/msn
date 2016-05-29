@@ -18,7 +18,8 @@ Meteor.publish('userProfile', function (userId) {
             'profile.gender'    : 1,
             'profile.country'   : 1,
             'profile.city'      : 1,
-            'profile.about'     : 1
+            'profile.about'     : 1,
+            'avatar'            : 1
         }
     });
 
@@ -36,7 +37,8 @@ Meteor.publish('latestUsers', function () {
     let users = Meteor.users.find({ '_id' : { $ne : this.userId } }, {
         fields : {
             'profile.firstname' : 1,
-            'profile.lastname'  : 1
+            'profile.lastname'  : 1,
+            'avatar'            : 1
         },
         sort   : { 'createdAt' : -1 },
         limit  : 20
@@ -109,7 +111,7 @@ Meteor.methods({
     },
 
     /**
-     * Find users whose firstname or lastname matches name.
+     * Find users whose first name or last name matches name.
      *
      * @param {String} name
      * @returns {Array}
@@ -117,15 +119,27 @@ Meteor.methods({
     searchUsers: function (name) {
         if (!this.userId) {
             throw new Meteor.Error(401, 'You must be logged in');
+        } else if (!name) {
+            throw new Meteor.Error(400, 'Name is required');
         }
 
-        /* TODO: Save user firstname and lastname in lowercase and search in lowercase too */
+        console.log("^" + name + "\\b");
+
+        let regex = `^${name}`;
+
+        /* Find users whose first or last name begins with given name in parameter.
+         * Make sure it is a case insensitive search.
+         */
         return Meteor.users.find({
-            $or : [{ 'profile.firstname' : name }, { 'profile.lastname' : name }]
+            $or : [
+                { 'profile.firstname' : { $regex: regex, $options: 'i' } },
+                { 'profile.lastname'  : { $regex: regex, $options: 'i' } }
+            ]
         }, {
             fields : {
                 'profile.firstname' : 1,
-                'profile.lastname'  : 1
+                'profile.lastname'  : 1,
+                'avatar'            : 1
             }
         }).fetch();
     },

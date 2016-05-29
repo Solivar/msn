@@ -83,7 +83,7 @@ privateRoutes.route('/', {
     name: 'home',
     action: function () {
         BlazeLayout.render('layouts_base', {
-            main: 'user_profile_view'
+            main: 'user_my_profile_view'
         });
     }
 });

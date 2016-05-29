@@ -41,6 +41,27 @@ Template.user_settings_includes_info.onRendered(function () {
             });
         }
     });
+
+    /* jQuery Validation */
+    $('#user-info-form').validate({
+        rules : {
+            firstname : {
+                required : true
+            },
+            lastname : {
+                required : true
+            }
+        },
+
+        messages: {
+            firstname : {
+                required : 'First name is required'
+            },
+            lastname : {
+                required : 'Last name is required'
+            }
+        }
+    });
 });
 
 Template.user_settings_includes_info.events({
@@ -65,10 +86,9 @@ Template.user_settings_includes_info.events({
             userData[entity.name] = entity.value;
         });
 
-        /* TODO: Implement input value check */
         Meteor.call('changeUserInfo', userData, function (error, result) {
-            if (!error) {
-                console.log('success');
+            if (error) {
+                $('.error-info').text(error.reason);
             }
         });
     }

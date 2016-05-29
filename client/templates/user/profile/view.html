@@ -6,21 +6,30 @@
 <template name="user_profile_view">
     <div class="profile-page">
         {{#with getUser}}
-            <div class="row">
+            <div class="row user-heading">
                 <div class="col-sm-12">
                     <h2>{{profile.firstname}} {{profile.lastname}}</h2>
                 </div>
             </div>
-            <div class="row">
-                <div class="{{#if isMyProfile}}col-sm-12{{else}}col-sm-8{{/if}}">
-                    <p>From: {{profile.city}}, {{profile.country}}</p>
-                    <p>Age: {{dobToAge profile.dob}}</p>
-                    {{#if profile.about}}
-                        <p>{{profile.about}}</p>
-                    {{/if}}
+            <div class="row user-info">
+                <div class="col-sm-6">
+                    <div class="profile-avatar">
+                        {{#if avatar}}
+                            <img src="{{avatar}}">
+                        {{else}}
+                            <img src="/default-avatar.png">
+                        {{/if}}
+                    </div>
                 </div>
-                {{#unless isMyProfile}}
-                    <div class="col-sm-4">
+                <div class="col-sm-6">
+                    <div class="{{#if isMyProfile}}col-sm-12{{else}}col-sm-8{{/if}}">
+                        <p>From: {{profile.city}} {{profile.country}}</p>
+                        <p>Age: {{dobToAge profile.dob}}</p>
+                        {{#if profile.about}}
+                            <p>{{profile.about}}</p>
+                        {{/if}}
+                    </div>
+                    <div class="col-sm-12">
                         {{#if canInvite}}
                             <p>
                                 <a href="#" class="profile-action request-friend">
@@ -42,11 +51,19 @@
                                 <p>Friend request already sent</p>
                             {{/if}}
                         {{/if}}
-                        <p>
-                            <a href="#" class="profile-action send-msg">
-                                <i class="fa fa-envelope" aria-hidden="true"></i> Send Message
-                            </a>
-                        </p>
+                        {{#if equals canInvite 'none'}}
+                            <p>AAAAAAAAa</p>
+                        {{/if}}
+                        {{#if equals canInvite 'request'}}
+                            <p>TEEEEE</p>
+                        {{/if}}
+                        {{#if equals canInvite 'friend'}}
+                            <p>
+                                <a href="#" class="action-unfriend">
+                                    <i class="fa fa-ban" aria-hidden="true"></i> Remove Friend
+                                </a>
+                            </p>
+                        {{/if}}
                         <p>
                             <a href="#" class="action-unfriend">
                                 <i class="fa fa-ban" aria-hidden="true"></i> Remove Friend
@@ -58,12 +75,18 @@
                             </a>
                         </p>
                     </div>
-                {{/unless}}
+                </div>
             </div>
-
-            {{> user_profile_message_view}}
-
-            {{> user_profile_message_list userId=_id}}
+            <div class="row">
+                <div class="col-sm-12">
+                    {{> user_profile_message_view}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    {{> user_profile_message_list userId=_id}}
+                </div>
+            </div>
         {{/with}}
     </div>
 </template>

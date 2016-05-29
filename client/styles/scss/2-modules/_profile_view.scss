@@ -5,3 +5,27 @@
     margin-right: 35px;
   }
 }
+
+.profile-avatar {
+  img {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+.user-info {
+  margin-bottom: 20px;
+  text-align: center;
+
+  @include respond-to('small') {
+    text-align: left;
+  }
+}
+
+.user-heading {
+  text-align: center;
+
+  @include respond-to('small') {
+    text-align: left;
+  }
+}
