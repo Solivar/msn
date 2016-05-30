@@ -1,0 +1,20 @@
+/* Styles for profile image view */
+
+.image-button {
+  border: none;
+  padding: 10px;
+  color: $c-white;
+  margin: 10px 0;
+}
+
+.pick-image {
+  background: $c-green;
+}
+
+.delete-image {
+  background: $c-red;
+}
+
+.profile-image {
+  margin-bottom: 20px;
+}

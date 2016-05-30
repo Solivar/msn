@@ -30,7 +30,7 @@
                             <p>Country: {{profile.country}}</p>
                         {{/if}}
                         <p>{{dobToAge profile.dob}}, {{profile.gender}}</p>
-                        <p>{{profile.about}}</p>
+                        <p class="profile-about-me">{{profile.about}}</p>
                     </div>
                     <div class="col-sm-12">
                         {{#if getRequest}}
@@ -65,7 +65,7 @@
 
                         {{#if canBan}}
                         <p>
-                            <a href="#" class="action-ban">
+                            <a href="#" class="action-ban{{#if isBanned}} unban{{/if}}">
                                 {{#if isBanned}}
                                     <i class="fa fa-ban" aria-hidden="true"></i> Unblock User
                                 {{else}}

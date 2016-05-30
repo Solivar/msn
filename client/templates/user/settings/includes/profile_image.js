@@ -8,6 +8,19 @@ Template.user_settings_includes_profile_image.onCreated(function () {
     document.title = 'MSN - Change Profile Image';
 
     filepicker.setKey(Meteor.settings.public.filestackAPIKey);
+
+    this.subscribe('userProfile', Meteor.userId());
+});
+
+Template.user_settings_includes_profile_image.helpers({
+    /**
+     * Get currently open user profile data.
+     *
+     * @returns {Object}
+     */
+    getUser: function () {
+        return Meteor.users.findOne({ _id : Meteor.userId() });
+    }
 });
 
 Template.user_settings_includes_profile_image.events({
@@ -29,9 +42,14 @@ Template.user_settings_includes_profile_image.events({
 
             /* On successful upload */
             function (Blob) {
-                console.log(Blob);
                 Meteor.call('updateAvatar', Blob.url);
             }
         );
+    },
+
+    'click .delete-image': function (e) {
+        e.preventDefault();
+
+        Meteor.call('deleteAvatar');
     }
 });

@@ -29,3 +29,24 @@
     text-align: left;
   }
 }
+
+.profile-message {
+  margin-bottom: 10px;
+
+  .message-body {
+    p {
+      white-space: pre-wrap;
+    }
+  }
+
+  .col-sm-4 {
+    @include respond-to('small') {
+      text-align: right;
+    }
+  }
+
+  .remove-message {
+    color: $c-red;
+  }
+}
+

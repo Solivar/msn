@@ -187,6 +187,13 @@ userSettingsRoutes.route('/profile-image', {
  */
 privateRoutes.route('/profile/:userId', {
     name: 'user-profile',
+    triggersEnter: [
+        function (context, redirect) {
+            if (context.params.userId === Meteor.userId()) {
+                return redirect('home');
+            }
+        }
+    ],
     action: function () {
         BlazeLayout.render('layouts_base', {
             main: 'user_profile_view'

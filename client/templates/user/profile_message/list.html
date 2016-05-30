@@ -6,22 +6,18 @@
 <template name="user_profile_message_list">
     <div class="row">
         {{#each getMessages}}
-            <div class="col-sm-12">
-                <section class="profile-message">
-                    <div class="message-body">
-                        <p>{{message}}</p>
+            <div class="col-sm-12 profile-message">
+                <div class="col-sm-12 message-body">
+                    <p>{{message}}</p>
+                </div>
+                <div class="col-sm-8">
+                    <p><a href="{{profileUrl author}}">{{firstname}} {{lastname}}</a></p>
+                </div>
+                {{#if isProfileOwner}}
+                    <div class="col-sm-4">
+                        <a href="#" class="remove-message">Remove</a>
                     </div>
-                    <footer>
-                        <div class="col-sm-8">
-                            <p><a href="{{profileUrl author}}">{{firstname}} {{lastname}}</a></p>
-                        </div>
-                        {{#if isProfileOwner}}
-                            <div class="col-sm-4">
-                                <a href="#" class="remove-message">Remove</a>
-                            </div>
-                        {{/if}}
-                    </footer>
-                </section>
+                {{/if}}
             </div>
         {{/each}}
     </div>

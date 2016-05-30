@@ -18,7 +18,8 @@ Schema.ProfileMessages = new SimpleSchema({
 
     message : {
         type  : String,
-        label : 'Message'
+        label : 'Message',
+        max   : 100
     },
 
     isDeleted : {

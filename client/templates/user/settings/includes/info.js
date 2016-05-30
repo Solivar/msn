@@ -46,19 +46,23 @@ Template.user_settings_includes_info.onRendered(function () {
     $('#user-info-form').validate({
         rules : {
             firstname : {
-                required : true
+                required  : true,
+                maxlength : 32
             },
             lastname : {
-                required : true
+                required  : true,
+                maxlength : 32
             }
         },
 
         messages: {
             firstname : {
-                required : 'First name is required'
+                required  : 'First name is required',
+                maxlength : 'First name cannot exceed 32 characters'
             },
             lastname : {
-                required : 'Last name is required'
+                required  : 'Last name is required',
+                maxlength : 'Last name cannot exceed 32 characters'
             }
         }
     });

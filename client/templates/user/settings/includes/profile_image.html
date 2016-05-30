@@ -10,9 +10,24 @@
                 <h2>Change Profile Image</h2>
             </div>
         </div>
-
+        <div class="row profile-image">
+            <div class="col-sm-12">
+                {{#with getUser}}
+                    <div class="profile-avatar">
+                        {{#if avatar}}
+                            <img src="{{avatar}}">
+                        {{else}}
+                            <img src="/default-avatar.png">
+                        {{/if}}
+                    </div>
+                {{/with}}
+            </div>
+        </div>
         <div class="row">
-            <a href="#" class="pick-image">Upload profile image</a>
+            <div class="col-sm-12">
+                <button class="pick-image image-button">Upload profile image</button>
+                <button class="delete-image image-button">Delete profile image</button>
+            </div>
         </div>
     </div>
 </template>

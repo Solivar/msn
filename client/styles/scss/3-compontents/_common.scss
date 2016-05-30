@@ -84,9 +84,12 @@ label.error-msg {
 }
 
 .user-box {
-  width: 150px;
-  height: 100px;
+  min-width: 150px;
+  min-height: 100px;
   display: inline-block;
+  a {
+    text-decoration: none;
+  }
 
   .user-avatar {
     width: 50px;
@@ -104,4 +107,9 @@ label.error-msg {
   div {
     display: inline-block;
   }
+}
+
+.profile-about-me {
+  white-space: pre-wrap;
+  text-align: left;
 }

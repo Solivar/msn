@@ -35,10 +35,12 @@ Template.register_view.onRendered(function () {
                 equalTo  : '#user-register-form-password'
             },
             firstname : {
-                required : true
+                required  : true,
+                maxlength : 32
             },
             lastname : {
-                required : true
+                required : true,
+                maxlength : 32
             }
         },
 
@@ -60,10 +62,12 @@ Template.register_view.onRendered(function () {
                 equalTo  : 'Passwords must match'
             },
             firstname : {
-                required : 'First name is required'
+                required  : 'First name is required',
+                maxlength : 'First name cannot exceed 32 characters'
             },
             lastname : {
-                required : 'Last name is required'
+                required  : 'Last name is required',
+                maxlength : 'Last name cannot exceed 32 characters'
             }
         }
     });
