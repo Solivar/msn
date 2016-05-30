@@ -122,6 +122,8 @@ Meteor.methods({
             throw new Meteor.Error(401, 'You must be logged in');
         } else if (!name) {
             throw new Meteor.Error(400, 'Name is required');
+        } else if (name.length > 32) {
+            throw new Meteor.Error(400, 'Name cannot exceed 32 characters');
         }
 
         let regex = `^${name}`;
